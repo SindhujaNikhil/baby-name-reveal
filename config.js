@@ -7,10 +7,10 @@
 window.BabyRevealConfig = {
     // Reveal Date & Time (Format: YYYY-MM-DDTHH:MM:SS)
     // Example: "2026-08-16T12:00:00" for August 16, 2026 at 12:00 PM local time
-    revealDate: "2026-08-16T12:00:00",
+    revealDate: "2026-08-16T12:30:00",
 
     // Parents Info
-    parentNames: "Sarah & David",
+    parentNames: "Sai Sindhuja & Nikhil",
     babyTitle: "Our Little Miracle",
     subtitle: "Something sweet is on the way...",
 
