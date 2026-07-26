@@ -290,62 +290,7 @@ document.addEventListener('DOMContentLoaded', () => {
     if (btnBoy) btnBoy.addEventListener('click', () => castVote('boy'));
     if (btnGirl) btnGirl.addEventListener('click', () => castVote('girl'));
 
-    // 10. Guestbook Engine
-    const wishesKey = 'baby_reveal_wishes';
-    let wishes = JSON.parse(localStorage.getItem(wishesKey)) || [
-        { name: "Grandma Rose", text: "We can't wait to meet our sweet grandchild! Sending all our love.", date: "July 25, 2026" },
-        { name: "Uncle Mark", text: "Counting down the days! Wishing mom and baby good health!", date: "July 26, 2026" }
-    ];
-
-    const wishForm = document.getElementById('wish-form');
-    const wishesGrid = document.getElementById('wishes-grid');
-
-    function renderWishes() {
-        if (!wishesGrid) return;
-        wishesGrid.innerHTML = '';
-        wishes.forEach(item => {
-            const card = document.createElement('div');
-            card.className = 'wish-card';
-            card.innerHTML = `
-                <div class="wish-author">${escapeHTML(item.name)}</div>
-                <div class="wish-text">${escapeHTML(item.text)}</div>
-                <div class="wish-date">${item.date}</div>
-            `;
-            wishesGrid.prepend(card);
-        });
-    }
-    renderWishes();
-
-    if (wishForm) {
-        wishForm.addEventListener('submit', (e) => {
-            e.preventDefault();
-            const nameInput = document.getElementById('wish-name');
-            const textInput = document.getElementById('wish-message');
-
-            if (!nameInput.value.trim() || !textInput.value.trim()) return;
-
-            const newWish = {
-                name: nameInput.value.trim(),
-                text: textInput.value.trim(),
-                date: new Date().toLocaleDateString('en-US', { month: 'short', day: 'numeric', year: 'numeric' })
-            };
-
-            wishes.push(newWish);
-            localStorage.setItem(wishesKey, JSON.stringify(wishes));
-            renderWishes();
-
-            nameInput.value = '';
-            textInput.value = '';
-        });
-    }
-
-    function escapeHTML(str) {
-        return str.replace(/[&<>'"]/g, 
-            tag => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', "'": '&#39;', '"': '&quot;' }[tag] || tag)
-        );
-    }
-
-    // 11. Secret Code & Keyboard Bypass (Shift + P)
+    // 10. Secret Code & Keyboard Bypass (Shift + P)
     function openSecretModal() {
         if (secretModal) secretModal.style.display = 'flex';
         if (secretInput) secretInput.focus();
