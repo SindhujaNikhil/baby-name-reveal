@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Baby Name Reveal - Counting Down to August 16!</title>
+    <meta name="description" content="Join us in counting down to reveal our baby's name on August 16!">
+
+    <!-- Open Graph Metadata for Social Sharing (WhatsApp, Facebook, Twitter) -->
+    <meta property="og:title" content="Our Baby Name Reveal Countdown! 👶✨">
+    <meta property="og:description" content="Count down with us until August 16 as we reveal our baby's name!">
+    <meta property="og:type" content="website">
+
+    <!-- Stylesheet -->
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+    <!-- Dynamic Canvas Particle Layers -->
+    <canvas id="particle-canvas"></canvas>
+    <canvas id="confetti-canvas"></canvas>
+
+    <div class="container">
+        <!-- Top Navigation Bar Controls -->
+        <header class="top-bar">
+            <div class="brand-badge">
+                <span>🍼</span> <span id="parent-names">Sarah & David</span>
+            </div>
+            <div class="controls-group">
+                <button id="sound-btn" class="icon-btn" title="Toggle Sound">🎵</button>
+                <button id="theme-btn" class="icon-btn" title="Switch Theme Palette">🎨</button>
+            </div>
+        </header>
+
+        <!-- Main Hero Card -->
+        <section class="hero-card">
+            <img id="hero-banner-img" class="hero-banner-img" src="assets/baby_hero.png" alt="Baby Reveal Banner">
+            <h1 id="hero-title" class="hero-title">Our Little Miracle</h1>
+            <p id="hero-subtitle" class="hero-subtitle">Something sweet is on the way...</p>
+            <div class="date-pill">
+                <span>🗓️ Reveal Date:</span>
+                <span id="reveal-date-display">August 16, 2026</span>
+            </div>
+        </section>
+
+        <!-- Countdown Timer Section -->
+        <section id="countdown-view">
+            <div class="countdown-container">
+                <div class="time-box">
+                    <div id="days" class="number-wrapper">00</div>
+                    <div class="label">Days</div>
+                </div>
+                <div class="time-box">
+                    <div id="hours" class="number-wrapper">00</div>
+                    <div class="label">Hours</div>
+                </div>
+                <div class="time-box">
+                    <div id="minutes" class="number-wrapper">00</div>
+                    <div class="label">Minutes</div>
+                </div>
+                <div class="time-box">
+                    <div id="seconds" class="number-wrapper">00</div>
+                    <div class="label">Seconds</div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Post-Countdown / Secret Preview Reveal View -->
+        <section id="reveal-view" class="reveal-wrapper">
+            <div class="reveal-card">
+                <div class="sparkle-crown">👑 ✨</div>
+                <h2 id="revealed-gender" class="revealed-gender-badge">It's a Girl! 💕</h2>
+                <h1 id="revealed-name" class="revealed-name">Aria Celeste</h1>
+                <div id="name-meaning" class="name-meaning-box">
+                    Aria means 'Melody / Gentle Breeze' and Celeste means 'Heavenly'. A name filled with harmony and love.
+                </div>
+            </div>
+        </section>
+
+        <!-- Interactive Pre-Reveal Voting Poll -->
+        <section class="section-card">
+            <h2 class="section-title">Take a Guess! 🎈</h2>
+            <p class="section-desc">What do you think our baby will be?</p>
+            <div class="poll-grid">
+                <div id="vote-boy" class="poll-option-btn">
+                    <div class="poll-icon">🧸</div>
+                    <div class="poll-label">It's a Boy!</div>
+                    <div class="poll-bar-outer">
+                        <div id="bar-boy" class="poll-bar-inner"></div>
+                    </div>
+                    <div id="count-boy" class="poll-count">0 votes</div>
+                </div>
+                <div id="vote-girl" class="poll-option-btn">
+                    <div class="poll-icon">🎀</div>
+                    <div class="poll-label">It's a Girl!</div>
+                    <div class="poll-bar-outer">
+                        <div id="bar-girl" class="poll-bar-inner"></div>
+                    </div>
+                    <div id="count-girl" class="poll-count">0 votes</div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Interactive Wishes Guestbook -->
+        <section class="section-card">
+            <h2 class="section-title">Wishes & Blessings 💌</h2>
+            <p class="section-desc">Leave a note for the parents & baby!</p>
+
+            <form id="wish-form" class="wishes-form">
+                <input type="text" id="wish-name" class="form-input" placeholder="Your Name" required>
+                <textarea id="wish-message" class="form-textarea" placeholder="Write your blessing or message..." required></textarea>
+                <button type="submit" class="submit-btn">
+                    <span>Send Blessing</span> 💖
+                </button>
+            </form>
+
+            <div id="wishes-grid" class="wishes-grid">
+                <!-- Wishes dynamically rendered here -->
+            </div>
+        </section>
+
+        <!-- Secret Parent Preview Modal -->
+        <div id="secret-modal" class="modal-overlay">
+            <div class="modal-card">
+                <h3 class="modal-title">🔒 Parent Preview Mode</h3>
+                <p class="modal-desc">Enter secret code to preview the reveal screen before August 16:</p>
+                <input type="password" id="secret-input" class="form-input" placeholder="Enter secret code (e.g. reveal123)" style="margin-bottom: 1rem;">
+                <div style="display: flex; gap: 0.75rem; justify-content: center;">
+                    <button id="modal-close" class="submit-btn" style="background: var(--text-muted);">Cancel</button>
+                    <button id="secret-submit" class="submit-btn">Preview Reveal</button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Footer -->
+        <footer>
+            <p>Made with ❤️ for our baby reveal | <span id="secret-trigger" class="secret-trigger">✨ Admin Preview</span></p>
+            <p style="font-size: 0.8rem; margin-top: 0.5rem; opacity: 0.6;">Tip: Press <kbd style="background: rgba(255,255,255,0.6); padding: 2px 6px; border-radius: 4px;">Shift + P</kbd> anytime to preview reveal!</p>
+        </footer>
+    </div>
+
+    <!-- Application Configuration & Scripts -->
+    <script src="config.js"></script>
+    <script src="script.js"></script>
+</body>
+</html>
