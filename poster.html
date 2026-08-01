@@ -1,0 +1,168 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Baby Name Reveal - Scan Me!</title>
+    
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Rozha+One&family=Outfit:wght@300;400;600&display=swap" rel="stylesheet">
+    
+    <style>
+        :root {
+            --primary: #c0392b;
+            --gold: #d4af37;
+            --bg: #FDFBF7;
+            --text: #2c3e50;
+        }
+
+        body {
+            margin: 0;
+            padding: 0;
+            background-color: var(--bg);
+            font-family: 'Outfit', sans-serif;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            color: var(--text);
+        }
+
+        .poster-container {
+            width: 100%;
+            max-width: 600px;
+            background: #fff;
+            padding: 3rem;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.05);
+            border: 2px solid var(--gold);
+            border-radius: 8px;
+            text-align: center;
+            position: relative;
+        }
+
+        /* Decorative Corners */
+        .poster-container::before, .poster-container::after {
+            content: '';
+            position: absolute;
+            width: 40px;
+            height: 40px;
+            border: 2px solid var(--gold);
+        }
+        .poster-container::before {
+            top: 15px; left: 15px;
+            border-right: none; border-bottom: none;
+        }
+        .poster-container::after {
+            bottom: 15px; right: 15px;
+            border-left: none; border-top: none;
+        }
+
+        .decorative-lamp {
+            font-size: 3rem;
+            margin-bottom: 1rem;
+        }
+
+        h1 {
+            font-family: 'Rozha One', serif;
+            color: var(--primary);
+            font-size: 2.5rem;
+            margin: 0 0 0.5rem 0;
+        }
+
+        p.subtitle {
+            font-size: 1.2rem;
+            color: #7f8c8d;
+            margin-bottom: 3rem;
+        }
+
+        .qr-wrapper {
+            background: #fff;
+            padding: 1.5rem;
+            border: 1px dashed var(--gold);
+            border-radius: 12px;
+            display: inline-block;
+            margin-bottom: 3rem;
+        }
+
+        .qr-wrapper img {
+            width: 250px;
+            height: 250px;
+            display: block;
+        }
+
+        .scan-instruction {
+            font-size: 1.5rem;
+            font-weight: 600;
+            color: var(--primary);
+            letter-spacing: 1px;
+            text-transform: uppercase;
+            margin-bottom: 1rem;
+        }
+
+        .parents-name {
+            font-family: 'Rozha One', serif;
+            font-size: 1.2rem;
+            color: var(--gold);
+        }
+
+        /* Print Button - Hidden when actually printing */
+        .print-btn {
+            position: fixed;
+            bottom: 2rem;
+            right: 2rem;
+            background: var(--primary);
+            color: white;
+            border: none;
+            padding: 1rem 2rem;
+            font-size: 1rem;
+            border-radius: 50px;
+            cursor: pointer;
+            box-shadow: 0 4px 15px rgba(192, 57, 43, 0.3);
+            font-family: 'Outfit', sans-serif;
+            transition: transform 0.2s;
+        }
+        .print-btn:hover {
+            transform: translateY(-2px);
+        }
+
+        /* Print Styles */
+        @media print {
+            body { background: white; }
+            .poster-container {
+                box-shadow: none;
+                border: 2px solid var(--gold);
+                max-width: 100%;
+                height: 100vh;
+                display: flex;
+                flex-direction: column;
+                justify-content: center;
+                align-items: center;
+            }
+            .print-btn { display: none; }
+        }
+    </style>
+</head>
+<body>
+
+    <div class="poster-container">
+        <div class="decorative-lamp">🪔</div>
+        
+        <h1>Our Little Miracle is Here!</h1>
+        <p class="subtitle">Something sweet is on the way...</p>
+        
+        <div class="scan-instruction">Scan to discover my name! ✨</div>
+        
+        <div class="qr-wrapper">
+            <!-- Ensure this points to the QR code we downloaded -->
+            <img src="baby_reveal_qr.png" alt="Scan me for the reveal">
+        </div>
+        
+        <div class="parents-name">With love,<br>Sai Sindhuja & Nikhil</div>
+    </div>
+
+    <button class="print-btn" onclick="window.print()">🖨️ Print Poster</button>
+
+</body>
+</html>
