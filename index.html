@@ -3,42 +3,76 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Baby Name Reveal - Counting Down to August 16!</title>
-    <meta name="description" content="Join us in counting down to reveal our baby's name on August 16!">
+    <title>Baby Name Reveal — Nāmakaraṇa Countdown!</title>
+    <meta name="description" content="Join Sai Sindhuja & Nikhil in counting down to the Nāmakaraṇa — our baby's name reveal on August 16!">
 
-    <!-- Open Graph Metadata for Social Sharing (WhatsApp, Facebook, Twitter) -->
-    <meta property="og:title" content="Our Baby Name Reveal Countdown! 👶✨">
-    <meta property="og:description" content="Count down with us until August 16 as we reveal our baby's name!">
+    <!-- Open Graph Metadata -->
+    <meta property="og:title" content="🪔 Our Baby's Nāmakaraṇa Countdown! శుభ నామకరణం">
+    <meta property="og:description" content="Count down with us until August 16 as we reveal our baby's name in a traditional South Indian celebration!">
     <meta property="og:type" content="website">
 
-    <!-- Stylesheet -->
+    <!-- Google Fonts: South Indian-Inspired Pairings -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Rozha+One&family=Noto+Serif:ital,wght@0,400;0,600;0,700;1,400&family=Outfit:wght@300;400;500;600;700&family=Noto+Sans+Telugu:wght@400;600;700&display=swap" rel="stylesheet">
+
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
 
-    <!-- Dynamic Canvas Particle Layers -->
+    <!-- Kolam Canvas Background -->
     <canvas id="particle-canvas"></canvas>
     <canvas id="confetti-canvas"></canvas>
 
+    <!-- Torana (Mango Leaf Garland) Decorative Strip -->
+    <div class="torana-strip" aria-hidden="true">
+        <div class="torana-leaves">
+            <span>🌿</span><span>🥭</span><span>🌿</span><span>🥭</span><span>🌿</span>
+            <span>🥭</span><span>🌿</span><span>🥭</span><span>🌿</span><span>🥭</span>
+            <span>🌿</span><span>🥭</span><span>🌿</span><span>🥭</span><span>🌿</span>
+            <span>🥭</span><span>🌿</span><span>🥭</span><span>🌿</span><span>🥭</span>
+            <span>🌿</span><span>🥭</span><span>🌿</span><span>🥭</span><span>🌿</span>
+        </div>
+    </div>
+
     <div class="container">
-        <!-- Top Navigation Bar Controls -->
+
+        <!-- Top Navigation Bar -->
         <header class="top-bar">
             <div class="brand-badge">
-                <span>🍼</span> <span id="parent-names">Sai Sindhuja & Nikhil</span>
+                <span class="brand-lamp">🪔</span>
+                <span id="parent-names">Sai Sindhuja &amp; Nikhil</span>
             </div>
             <div class="controls-group">
+                <button id="lang-btn" class="icon-btn lang-btn" title="Toggle Language">తె</button>
                 <button id="sound-btn" class="icon-btn" title="Toggle Sound">🎵</button>
-                <button id="theme-btn" class="icon-btn" title="Switch Theme Palette">🎨</button>
+                <button id="theme-btn" class="icon-btn" title="Switch Theme">🏛️</button>
             </div>
         </header>
 
         <!-- Main Hero Card -->
         <section class="hero-card">
-            <img id="hero-banner-img" class="hero-banner-img" src="assets/baby_hero.png" alt="Baby Reveal Banner">
+            <!-- Temple Arch Decoration -->
+            <div class="temple-arch" aria-hidden="true">
+                <div class="arch-left"></div>
+                <div class="arch-center">🪷</div>
+                <div class="arch-right"></div>
+            </div>
+
+            <img id="hero-banner-img" class="hero-banner-img" src="assets/baby_mystery.png" alt="Baby Reveal Illustration">
+
             <h1 id="hero-title" class="hero-title">Our Little Miracle</h1>
-            <p id="hero-subtitle" class="hero-subtitle">Something sweet is on the way...</p>
+
+            <p id="hero-subtitle" class="hero-subtitle" data-en="Something sweet is on the way..." data-te="శుభ సమయం ఆసన్నమైంది...">
+                Something sweet is on the way...
+            </p>
+
+            <div class="ceremony-label" id="ceremony-label" data-en="Nāmakaraṇa Celebration" data-te="నామకరణం ఉత్సవం">
+                Nāmakaraṇa Celebration
+            </div>
+
             <div class="date-pill">
-                <span>🗓️ Reveal Date:</span>
+                <span class="deepam-icon">🪔</span>
                 <span id="reveal-date-display">August 16, 2026</span>
             </div>
         </section>
@@ -47,32 +81,67 @@
         <section id="countdown-view">
             <div class="countdown-container">
                 <div class="time-box">
+                    <div class="deepam-top" aria-hidden="true">🪔</div>
                     <div id="days" class="number-wrapper">00</div>
-                    <div class="label">Days</div>
+                    <div class="label" data-en="Days" data-te="రోజులు">Days</div>
                 </div>
                 <div class="time-box">
+                    <div class="deepam-top" aria-hidden="true">🪔</div>
                     <div id="hours" class="number-wrapper">00</div>
-                    <div class="label">Hours</div>
+                    <div class="label" data-en="Hours" data-te="గంటలు">Hours</div>
                 </div>
                 <div class="time-box">
+                    <div class="deepam-top" aria-hidden="true">🪔</div>
                     <div id="minutes" class="number-wrapper">00</div>
-                    <div class="label">Minutes</div>
+                    <div class="label" data-en="Minutes" data-te="నిమిషాలు">Minutes</div>
                 </div>
                 <div class="time-box">
+                    <div class="deepam-top" aria-hidden="true">🪔</div>
                     <div id="seconds" class="number-wrapper">00</div>
-                    <div class="label">Seconds</div>
+                    <div class="label" data-en="Seconds" data-te="సెకన్లు">Seconds</div>
                 </div>
             </div>
         </section>
 
-        <!-- Post-Countdown / Secret Preview Reveal View -->
+        <!-- Post-Countdown Reveal View -->
         <section id="reveal-view" class="reveal-wrapper">
             <div class="reveal-card">
-                <div class="sparkle-crown">👑 ✨</div>
-                <h2 id="revealed-gender" class="revealed-gender-badge">It's a Girl! 💕</h2>
+                <!-- Kolam Decorative Ring -->
+                <div class="kolam-ring" aria-hidden="true">
+                    <span>✦</span><span>❋</span><span>✦</span><span>❋</span><span>✦</span><span>❋</span><span>✦</span><span>❋</span>
+                </div>
+
+                <div class="om-crown">ॐ</div>
+
+                <h2 id="revealed-gender" class="revealed-gender-badge" data-en="" data-te="">It's a Girl! 💕</h2>
                 <h1 id="revealed-name" class="revealed-name">Aria Celeste</h1>
-                <div id="name-meaning" class="name-meaning-box">
-                    Aria means 'Melody / Gentle Breeze' and Celeste means 'Heavenly'. A name filled with harmony and love.
+
+                <!-- Name Meaning Box -->
+                <div id="name-meaning" class="name-meaning-box"></div>
+
+                <!-- Nakshatra & Cultural Details Card -->
+                <div class="cultural-details-card">
+                    <div class="cultural-row" id="nakshatra-row">
+                        <div class="cultural-icon">⭐</div>
+                        <div>
+                            <div class="cultural-label" data-en="Birth Star (Nakshatra)" data-te="జన్మ నక్షత్రం">Birth Star (Nakshatra)</div>
+                            <div class="cultural-value" id="nakshatra-value">Rohini • రోహిణి</div>
+                        </div>
+                    </div>
+                    <div class="cultural-divider"></div>
+                    <div class="cultural-row" id="etymology-row">
+                        <div class="cultural-icon">📜</div>
+                        <div>
+                            <div class="cultural-label" data-en="Name Origin" data-te="నామ మూలం">Name Origin</div>
+                            <div class="cultural-value" id="etymology-value"></div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Blessing Phrase -->
+                <div class="blessing-block">
+                    <div class="blessing-telugu" id="blessing-telugu">ఆయుష్మాన్ భవ</div>
+                    <div class="blessing-english" id="blessing-english">May you live long and flourish</div>
                 </div>
             </div>
         </section>
@@ -81,24 +150,35 @@
         <!-- Secret Parent Preview Modal -->
         <div id="secret-modal" class="modal-overlay">
             <div class="modal-card">
-                <h3 class="modal-title">🔒 Parent Preview Mode</h3>
-                <p class="modal-desc">Enter secret code to preview the reveal screen before August 16:</p>
-                <input type="password" id="secret-input" class="form-input" placeholder="Enter secret code (e.g. reveal123)" style="margin-bottom: 1rem;">
+                <div class="modal-lamp">🪔</div>
+                <h3 class="modal-title">Parent Preview Mode</h3>
+                <p class="modal-desc">Enter the secret code to preview the reveal before August 16:</p>
+                <input type="password" id="secret-input" class="form-input" placeholder="Enter secret code" style="margin-bottom: 1rem;">
                 <div style="display: flex; gap: 0.75rem; justify-content: center;">
-                    <button id="modal-close" class="submit-btn" style="background: var(--text-muted);">Cancel</button>
-                    <button id="secret-submit" class="submit-btn">Preview Reveal</button>
+                    <button id="modal-close" class="modal-btn modal-btn-cancel">Cancel</button>
+                    <button id="secret-submit" class="modal-btn modal-btn-confirm">Preview Reveal</button>
                 </div>
             </div>
         </div>
 
         <!-- Footer -->
         <footer>
-            <p>Made with ❤️ for our baby reveal | <span id="secret-trigger" class="secret-trigger">✨ Admin Preview</span></p>
-            <p style="font-size: 0.8rem; margin-top: 0.5rem; opacity: 0.6;">Tip: Press <kbd style="background: rgba(255,255,255,0.6); padding: 2px 6px; border-radius: 4px;">Shift + P</kbd> anytime to preview reveal!</p>
+            <div class="footer-deepam">🪔</div>
+            <p>
+                Made with ❤️ for our <span id="ceremony-footer" data-en="Nāmakaraṇa" data-te="నామకరణం">Nāmakaraṇa</span> celebration
+                &nbsp;|&nbsp;
+                <span id="secret-trigger" class="secret-trigger">✨ Admin Preview</span>
+            </p>
+            <p class="footer-blessing" data-en="Shubham Bhavatu — May all be auspicious" data-te="శుభం భవతు — అందరికీ శుభమగుగాక">
+                Shubham Bhavatu — May all be auspicious
+            </p>
+            <p style="font-size: 0.78rem; margin-top: 0.5rem; opacity: 0.55;">
+                Press <kbd>Shift + P</kbd> anytime to preview reveal
+            </p>
         </footer>
+
     </div>
 
-    <!-- Application Configuration & Scripts -->
     <script src="config.js"></script>
     <script src="script.js"></script>
 </body>

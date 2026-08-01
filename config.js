@@ -6,30 +6,40 @@
 
 window.BabyRevealConfig = {
     // Reveal Date & Time (Format: YYYY-MM-DDTHH:MM:SS)
-    // Example: "2026-08-16T12:00:00" for August 16, 2026 at 12:00 PM local time
-    revealDate: "2026-08-16T12:30:00",
+    revealDate: "2026-08-01T12:56:00",
 
     // Parents Info
     parentNames: "Sai Sindhuja & Nikhil",
     babyTitle: "Our Little Miracle",
     subtitle: "Something sweet is on the way...",
+    subtitleTelugu: "శుభ సమయం ఆసన్నమైంది...",
 
-    // Baby Name Details (Revealed after countdown or secret preview code)
-    babyName: "Aria Celeste",
-    babyGender: "Girl", // Options: "Girl", "Boy", "Surprise"
-    nameMeaning: "Aria means 'Melody / Gentle Breeze' and Celeste means 'Heavenly'. A name filled with harmony and love.",
+    // Baby Name Details
+    babyName: "Bujjiamma",
+    babyGender: "Girl",
+    nameMeaning: "An affectionate Telugu name meaning 'precious little one' or 'beloved daughter'.",
     birthMonthExpected: "September 2026",
 
-    // Photos & Media
-    heroImage: "assets/baby_hero.png",
-    babyPhoto: "", // Optional path to ultrasound or baby photo (e.g. "assets/ultrasound.jpg")
+    // South Indian Cultural Details
+    nakshatra: "Rohini",                        // Birth star (Nakshatra)
+    nakshatraTelugu: "రోహిణి",                 // Telugu script for Nakshatra
+    nameLanguage: "Telugu",                   // Language of name origin
+    nameEtymology: "From Telugu — 'Bujji' means cute or tiny, and 'amma' is an endearing suffix for a daughter.",
+    blessingPhrase: "ఆయుష్మాన్ భవ",           // Traditional Telugu blessing
+    blessingTranslation: "May you live long and flourish",
+    ceremonyType: "Nāmakaraṇa",                // Naming ceremony type
+    ceremonyTypeTelugu: "నామకరణం",
 
-    // Theme Customization
-    defaultTheme: "neutral", // Options: "neutral" (Gold & Sage), "pink" (Rose Cloud), "blue" (Sky Blue)
-    
-    // Secret Preview Key Code (Default: "reveal123" or press Shift + P on keyboard)
+    // Hero Images (Two-state)
+    heroImageMystery: "assets/baby_mystery.png",   // Shown during countdown
+    heroImageReveal: "assets/baby_reveal.png",      // Shown after reveal
+
+    // Theme: "temple" (Temple Gold), "silk" (Kanchipuram Silk), "jasmine" (Jasmine Garden)
+    defaultTheme: "temple",
+
+    // Secret Preview Code (Default: "reveal123" or press Shift + P)
     secretCode: "reveal123",
-    
+
     // Social / Share Settings
-    shareMessage: "Join us in counting down to reveal our baby's name on August 16! 🍼✨",
+    shareMessage: "Join us for our Nāmakaraṇa countdown — revealing our baby's name on August 16! 🪔✨",
 };

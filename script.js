@@ -1,23 +1,10 @@
 /**
- * Baby Name Reveal - Application Logic
- * -----------------------------------
- * Handles countdown timer, reveal animation, sound synthesizer,
- * particle system, voting poll, guestbook, and secret code bypass.
+ * Baby Name Reveal - South Indian Nāmakaraṇa Logic
  */
 
 document.addEventListener('DOMContentLoaded', () => {
     // 1. Initialize Configuration
-    const config = window.BabyRevealConfig || {
-        revealDate: "2026-08-16T12:00:00",
-        parentNames: "Parents",
-        babyTitle: "Our Little Miracle",
-        subtitle: "The countdown to reveal our baby's name!",
-        babyName: "Aria Celeste",
-        babyGender: "Girl",
-        nameMeaning: "A beautiful melody filled with love.",
-        defaultTheme: "neutral",
-        secretCode: "reveal123"
-    };
+    const config = window.BabyRevealConfig;
 
     // DOM References
     const daysEl = document.getElementById('days');
@@ -26,36 +13,43 @@ document.addEventListener('DOMContentLoaded', () => {
     const secondsEl = document.getElementById('seconds');
     const countdownView = document.getElementById('countdown-view');
     const revealView = document.getElementById('reveal-view');
+    
     const revealedNameEl = document.getElementById('revealed-name');
     const revealedGenderEl = document.getElementById('revealed-gender');
     const nameMeaningEl = document.getElementById('name-meaning');
+    const nakshatraValueEl = document.getElementById('nakshatra-value');
+    const etymologyValueEl = document.getElementById('etymology-value');
+    
     const parentNamesEl = document.getElementById('parent-names');
     const heroTitleEl = document.getElementById('hero-title');
     const heroSubtitleEl = document.getElementById('hero-subtitle');
+    const ceremonyLabelEl = document.getElementById('ceremony-label');
     const revealDateDisplay = document.getElementById('reveal-date-display');
+    const heroBannerImg = document.getElementById('hero-banner-img');
+    
     const themeBtn = document.getElementById('theme-btn');
     const soundBtn = document.getElementById('sound-btn');
+    const langBtn = document.getElementById('lang-btn');
+    
     const secretTrigger = document.getElementById('secret-trigger');
     const secretModal = document.getElementById('secret-modal');
     const secretInput = document.getElementById('secret-input');
     const secretSubmitBtn = document.getElementById('secret-submit');
     const modalCloseBtn = document.getElementById('modal-close');
-    const heroBannerImg = document.getElementById('hero-banner-img');
 
     // State Variables
     let soundEnabled = true;
     let isRevealed = false;
     let countdownInterval = null;
+    let currentLang = 'en'; // 'en' or 'te'
 
-    // 2. Populate Header & Config Content
+    // 2. Populate Config Content
     if (parentNamesEl) parentNamesEl.textContent = config.parentNames;
     if (heroTitleEl) heroTitleEl.textContent = config.babyTitle;
-    if (heroSubtitleEl) heroSubtitleEl.textContent = config.subtitle;
-    if (config.heroImage && heroBannerImg) {
-        heroBannerImg.src = config.heroImage;
-    }
+    if (heroBannerImg && config.heroImageMystery) heroBannerImg.src = config.heroImageMystery;
 
-    // Format Target Date for display
+    // Format Target Date
+    // If the date string doesn't have a timezone (e.g. Z or +05:30), it is parsed in the user's local timezone.
     const targetDate = new Date(config.revealDate);
     if (revealDateDisplay) {
         const options = { month: 'long', day: 'numeric', year: 'numeric', hour: '2-digit', minute: '2-digit' };
@@ -63,31 +57,50 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 
     // 3. Theme Toggle Setup
-    const themes = ['neutral', 'pink', 'blue'];
+    const themes = ['temple', 'silk', 'jasmine'];
+    const themeIcons = ['🏛️', '🦚', '🌸'];
     let currentThemeIndex = themes.indexOf(config.defaultTheme) !== -1 ? themes.indexOf(config.defaultTheme) : 0;
     
-    function applyTheme(themeName) {
-        document.body.classList.remove('theme-pink', 'theme-blue');
-        if (themeName !== 'neutral') {
-            document.body.classList.add(`theme-${themeName}`);
-        }
+    function applyTheme(index) {
+        document.body.className = `theme-${themes[index]}`;
+        if (themeBtn) themeBtn.textContent = themeIcons[index];
     }
-    applyTheme(themes[currentThemeIndex]);
+    applyTheme(currentThemeIndex);
 
     if (themeBtn) {
         themeBtn.addEventListener('click', () => {
             currentThemeIndex = (currentThemeIndex + 1) % themes.length;
-            applyTheme(themes[currentThemeIndex]);
+            applyTheme(currentThemeIndex);
         });
     }
 
-    // 4. Countdown Timer Engine
+    // 4. Language Toggle Setup
+    function updateLanguage() {
+        const elements = document.querySelectorAll('[data-en][data-te]');
+        elements.forEach(el => {
+            el.textContent = currentLang === 'en' ? el.getAttribute('data-en') : el.getAttribute('data-te');
+        });
+        langBtn.textContent = currentLang === 'en' ? 'తె' : 'EN';
+    }
+
+    if (langBtn) {
+        langBtn.addEventListener('click', () => {
+            currentLang = currentLang === 'en' ? 'te' : 'en';
+            updateLanguage();
+        });
+    }
+
+    // 5. Countdown Timer Engine
     function updateCountdown() {
         const now = new Date().getTime();
         const distance = targetDate.getTime() - now;
 
         if (distance <= 0) {
             clearInterval(countdownInterval);
+            if (daysEl) daysEl.textContent = '00';
+            if (hoursEl) hoursEl.textContent = '00';
+            if (minutesEl) minutesEl.textContent = '00';
+            if (secondsEl) secondsEl.textContent = '00';
             triggerReveal();
             return;
         }
@@ -106,7 +119,7 @@ document.addEventListener('DOMContentLoaded', () => {
     updateCountdown();
     countdownInterval = setInterval(updateCountdown, 1000);
 
-    // 5. Reveal Engine & Celebration
+    // 6. Reveal Engine
     function triggerReveal() {
         if (isRevealed) return;
         isRevealed = true;
@@ -114,45 +127,63 @@ document.addEventListener('DOMContentLoaded', () => {
         if (countdownView) countdownView.style.display = 'none';
         if (revealView) revealView.style.display = 'block';
 
+        // Update Reveal Details
         if (revealedNameEl) revealedNameEl.textContent = config.babyName;
         if (revealedGenderEl) {
-            revealedGenderEl.textContent = config.babyGender === "Surprise" ? "✨ Our Blessing ✨" : `It's a ${config.babyGender}! 💕`;
+            revealedGenderEl.setAttribute('data-en', `It's a ${config.babyGender}! 💕`);
+            revealedGenderEl.setAttribute('data-te', `ఇది ఒక ${config.babyGender === 'Girl' ? 'అమ్మాయి' : 'అబ్బాయి'}! 💕`);
+            revealedGenderEl.textContent = currentLang === 'en' ? `It's a ${config.babyGender}! 💕` : `ఇది ఒక ${config.babyGender === 'Girl' ? 'అమ్మాయి' : 'అబ్బాయి'}! 💕`;
         }
         if (nameMeaningEl) nameMeaningEl.textContent = config.nameMeaning;
-
-        // Play Triumph Music Chime
-        if (soundEnabled) {
-            playCelebrationSound();
+        
+        if (nakshatraValueEl) {
+            nakshatraValueEl.textContent = `${config.nakshatra} • ${config.nakshatraTelugu}`;
+        }
+        if (etymologyValueEl) {
+            etymologyValueEl.textContent = config.nameEtymology;
         }
 
-        // Fire Confetti Animation
-        launchConfetti();
+        // Swap Hero Image
+        if (heroBannerImg && config.heroImageReveal) {
+            heroBannerImg.style.opacity = 0;
+            setTimeout(() => {
+                heroBannerImg.src = config.heroImageReveal;
+                heroBannerImg.style.opacity = 1;
+            }, 300);
+        }
+
+        if (soundEnabled) {
+            playCarnaticChime();
+        }
+
+        launchMarigoldConfetti();
     }
 
-    // 6. Web Audio API Celebration Chime
-    function playCelebrationSound() {
+    // 7. Web Audio API - Carnatic Chime
+    function playCarnaticChime() {
         try {
             const AudioContext = window.AudioContext || window.webkitAudioContext;
             if (!AudioContext) return;
             const ctx = new AudioContext();
             
-            const notes = [261.63, 329.63, 392.00, 523.25, 659.25, 783.99]; // C E G C E G
+            // Carnatic scale approximation: Sa Ri Ga Ma Pa Da Ni Sa
+            const notes = [261.63, 293.66, 329.63, 349.23, 392.00, 440.00, 493.88, 523.25];
             notes.forEach((freq, index) => {
                 const osc = ctx.createOscillator();
                 const gain = ctx.createGain();
-                osc.type = 'triangle';
-                osc.frequency.setValueAtTime(freq, ctx.currentTime + index * 0.12);
-                gain.gain.setValueAtTime(0.3, ctx.currentTime + index * 0.12);
-                gain.gain.exponentialRampToValueAtTime(0.001, ctx.currentTime + index * 0.12 + 0.8);
+                osc.type = 'sine';
+                osc.frequency.setValueAtTime(freq, ctx.currentTime + index * 0.15);
+                gain.gain.setValueAtTime(0.4, ctx.currentTime + index * 0.15);
+                gain.gain.exponentialRampToValueAtTime(0.001, ctx.currentTime + index * 0.15 + 1.0);
                 
                 osc.connect(gain);
                 gain.connect(ctx.destination);
                 
-                osc.start(ctx.currentTime + index * 0.12);
-                osc.stop(ctx.currentTime + index * 0.12 + 0.9);
+                osc.start(ctx.currentTime + index * 0.15);
+                osc.stop(ctx.currentTime + index * 0.15 + 1.1);
             });
         } catch (e) {
-            console.log('Audio playback prevented or unsupported', e);
+            console.log('Audio playback prevented', e);
         }
     }
 
@@ -163,8 +194,8 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     }
 
-    // 7. Confetti Particle Animation
-    function launchConfetti() {
+    // 8. Marigold Confetti
+    function launchMarigoldConfetti() {
         const canvas = document.getElementById('confetti-canvas');
         if (!canvas) return;
         const ctx = canvas.getContext('2d');
@@ -172,18 +203,19 @@ document.addEventListener('DOMContentLoaded', () => {
         canvas.height = window.innerHeight;
 
         const particles = [];
-        const colors = ['#f4a261', '#e76f51', '#2a9d8f', '#e9c46a', '#ffcad4', '#d81b60', '#0284c7'];
+        const colors = ['#f4900c', '#d4891a', '#c0392b', '#f5c842']; // Marigold, gold, kumkum
 
-        for (let i = 0; i < 150; i++) {
+        for (let i = 0; i < 200; i++) {
             particles.push({
                 x: Math.random() * canvas.width,
                 y: Math.random() * canvas.height - canvas.height,
-                size: Math.random() * 8 + 4,
+                size: Math.random() * 6 + 4,
                 color: colors[Math.floor(Math.random() * colors.length)],
-                speedY: Math.random() * 4 + 2,
-                speedX: (Math.random() - 0.5) * 3,
+                speedY: Math.random() * 3 + 2,
+                speedX: (Math.random() - 0.5) * 2,
                 rotation: Math.random() * 360,
-                rotationSpeed: (Math.random() - 0.5) * 10
+                rotationSpeed: (Math.random() - 0.5) * 8,
+                shape: Math.random() > 0.5 ? 'petal' : 'circle'
             });
         }
 
@@ -203,7 +235,17 @@ document.addEventListener('DOMContentLoaded', () => {
                 ctx.translate(p.x, p.y);
                 ctx.rotate((p.rotation * Math.PI) / 180);
                 ctx.fillStyle = p.color;
-                ctx.fillRect(-p.size / 2, -p.size / 2, p.size, p.size);
+                
+                if (p.shape === 'petal') {
+                    ctx.beginPath();
+                    ctx.ellipse(0, 0, p.size, p.size / 2, 0, 0, Math.PI * 2);
+                    ctx.fill();
+                } else {
+                    ctx.beginPath();
+                    ctx.arc(0, 0, p.size/2, 0, Math.PI * 2);
+                    ctx.fill();
+                }
+                
                 ctx.restore();
             });
 
@@ -214,81 +256,44 @@ document.addEventListener('DOMContentLoaded', () => {
         animate();
     }
 
-    // 8. Ambient Background Canvas Particles (Floating Stars / Bubbles)
+    // 9. Kolam Dot Grid Background
     const particleCanvas = document.getElementById('particle-canvas');
     if (particleCanvas) {
         const pCtx = particleCanvas.getContext('2d');
-        particleCanvas.width = window.innerWidth;
-        particleCanvas.height = window.innerHeight;
-
-        window.addEventListener('resize', () => {
+        
+        function resizeCanvas() {
             particleCanvas.width = window.innerWidth;
             particleCanvas.height = window.innerHeight;
-        });
+        }
+        window.addEventListener('resize', resizeCanvas);
+        resizeCanvas();
 
-        const bgParticles = Array.from({ length: 45 }, () => ({
-            x: Math.random() * particleCanvas.width,
-            y: Math.random() * particleCanvas.height,
-            radius: Math.random() * 3 + 1,
-            alpha: Math.random() * 0.6 + 0.2,
-            speedY: -(Math.random() * 0.4 + 0.1)
-        }));
-
-        function animateBgParticles() {
+        let time = 0;
+        function drawKolam() {
             pCtx.clearRect(0, 0, particleCanvas.width, particleCanvas.height);
-            bgParticles.forEach(p => {
-                p.y += p.speedY;
-                if (p.y < 0) p.y = particleCanvas.height;
-                pCtx.beginPath();
-                pCtx.arc(p.x, p.y, p.radius, 0, Math.PI * 2);
-                pCtx.fillStyle = `rgba(255, 255, 255, ${p.alpha})`;
-                pCtx.fill();
-            });
-            requestAnimationFrame(animateBgParticles);
+            time += 0.01;
+            
+            const spacing = 40;
+            const cols = Math.ceil(particleCanvas.width / spacing);
+            const rows = Math.ceil(particleCanvas.height / spacing);
+            
+            pCtx.fillStyle = 'rgba(212, 137, 26, 0.3)'; // Gold dots
+            
+            for(let i=0; i<=cols; i++) {
+                for(let j=0; j<=rows; j++) {
+                    // Create subtle wave movement
+                    const offsetX = Math.sin(time + j * 0.2) * 5;
+                    const offsetY = Math.cos(time + i * 0.2) * 5;
+                    
+                    pCtx.beginPath();
+                    pCtx.arc(i * spacing + offsetX, j * spacing + offsetY, 1.5, 0, Math.PI * 2);
+                    pCtx.fill();
+                }
+            }
+            requestAnimationFrame(drawKolam);
         }
-        animateBgParticles();
+        drawKolam();
     }
-
-    // 9. Interactive Guessing Poll Engine
-    const votesKey = 'baby_reveal_votes';
-    let votes = JSON.parse(localStorage.getItem(votesKey)) || { boy: 12, girl: 18 };
-    const userVotedKey = 'baby_reveal_voted';
-
-    const btnBoy = document.getElementById('vote-boy');
-    const btnGirl = document.getElementById('vote-girl');
-    const countBoy = document.getElementById('count-boy');
-    const countGirl = document.getElementById('count-girl');
-    const barBoy = document.getElementById('bar-boy');
-    const barGirl = document.getElementById('bar-girl');
-
-    function updatePollUI() {
-        const total = (votes.boy || 0) + (votes.girl || 0);
-        const boyPercent = total ? Math.round((votes.boy / total) * 100) : 50;
-        const girlPercent = total ? 100 - boyPercent : 50;
-
-        if (countBoy) countBoy.textContent = `${votes.boy} votes (${boyPercent}%)`;
-        if (countGirl) countGirl.textContent = `${votes.girl} votes (${girlPercent}%)`;
-        if (barBoy) barBoy.style.width = `${boyPercent}%`;
-        if (barGirl) barGirl.style.width = `${girlPercent}%`;
-
-        if (localStorage.getItem(userVotedKey)) {
-            if (btnBoy) btnBoy.classList.add('voted');
-            if (btnGirl) btnGirl.classList.add('voted');
-        }
-    }
-    updatePollUI();
-
-    function castVote(type) {
-        if (localStorage.getItem(userVotedKey)) return;
-        votes[type] = (votes[type] || 0) + 1;
-        localStorage.setItem(votesKey, JSON.stringify(votes));
-        localStorage.setItem(userVotedKey, type);
-        updatePollUI();
-        if (soundEnabled) playCelebrationSound();
-    }
-
-    if (btnBoy) btnBoy.addEventListener('click', () => castVote('boy'));
-    if (btnGirl) btnGirl.addEventListener('click', () => castVote('girl'));
 
     // 10. Secret Code & Keyboard Bypass (Shift + P)
     function openSecretModal() {
@@ -316,7 +321,6 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 
     document.addEventListener('keydown', (e) => {
-        // Press Shift + P to instantly preview the reveal
         if (e.shiftKey && (e.key === 'P' || e.key === 'p')) {
             triggerReveal();
         }
