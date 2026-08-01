@@ -44,8 +44,16 @@ document.addEventListener('DOMContentLoaded', () => {
     let currentLang = 'en'; // 'en' or 'te'
 
     // 2. Populate Config Content
-    if (parentNamesEl) parentNamesEl.textContent = config.parentNames;
-    if (heroTitleEl) heroTitleEl.textContent = config.babyTitle;
+    if (parentNamesEl) {
+        parentNamesEl.setAttribute('data-en', config.parentNames);
+        parentNamesEl.setAttribute('data-te', config.parentNamesTelugu || config.parentNames);
+        parentNamesEl.textContent = config.parentNames;
+    }
+    if (heroTitleEl) {
+        heroTitleEl.setAttribute('data-en', config.babyTitle);
+        heroTitleEl.setAttribute('data-te', config.babyTitleTelugu || config.babyTitle);
+        heroTitleEl.textContent = config.babyTitle;
+    }
     if (heroBannerImg && config.heroImageMystery) heroBannerImg.src = config.heroImageMystery;
 
     // Format Target Date
@@ -128,20 +136,36 @@ document.addEventListener('DOMContentLoaded', () => {
         if (revealView) revealView.style.display = 'block';
 
         // Update Reveal Details
-        if (revealedNameEl) revealedNameEl.textContent = config.babyName;
+        if (revealedNameEl) {
+            revealedNameEl.setAttribute('data-en', config.babyName);
+            revealedNameEl.setAttribute('data-te', config.babyNameTelugu || config.babyName);
+            revealedNameEl.textContent = currentLang === 'en' ? config.babyName : (config.babyNameTelugu || config.babyName);
+        }
         if (revealedGenderEl) {
             revealedGenderEl.setAttribute('data-en', `It's a ${config.babyGender}! 💕`);
             revealedGenderEl.setAttribute('data-te', `ఇది ఒక ${config.babyGender === 'Girl' ? 'అమ్మాయి' : 'అబ్బాయి'}! 💕`);
             revealedGenderEl.textContent = currentLang === 'en' ? `It's a ${config.babyGender}! 💕` : `ఇది ఒక ${config.babyGender === 'Girl' ? 'అమ్మాయి' : 'అబ్బాయి'}! 💕`;
         }
-        if (nameMeaningEl) nameMeaningEl.textContent = config.nameMeaning;
+        if (nameMeaningEl) {
+            nameMeaningEl.setAttribute('data-en', config.nameMeaning);
+            nameMeaningEl.setAttribute('data-te', config.nameMeaningTelugu || config.nameMeaning);
+            nameMeaningEl.textContent = currentLang === 'en' ? config.nameMeaning : (config.nameMeaningTelugu || config.nameMeaning);
+        }
         
         if (nakshatraValueEl) {
             nakshatraValueEl.textContent = `${config.nakshatra} • ${config.nakshatraTelugu}`;
         }
         if (etymologyValueEl) {
-            etymologyValueEl.textContent = config.nameEtymology;
+            etymologyValueEl.setAttribute('data-en', config.nameEtymology);
+            etymologyValueEl.setAttribute('data-te', config.nameEtymologyTelugu || config.nameEtymology);
+            etymologyValueEl.textContent = currentLang === 'en' ? config.nameEtymology : (config.nameEtymologyTelugu || config.nameEtymology);
         }
+        
+        // Hide irrelevant elements post-reveal
+        if (heroSubtitleEl) heroSubtitleEl.style.display = 'none';
+        if (ceremonyLabelEl) ceremonyLabelEl.style.display = 'none';
+        const datePill = document.querySelector('.date-pill');
+        if (datePill) datePill.style.display = 'none';
 
         // Swap Hero Image
         if (heroBannerImg && config.heroImageReveal) {

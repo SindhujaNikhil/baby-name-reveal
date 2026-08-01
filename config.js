@@ -10,14 +10,18 @@ window.BabyRevealConfig = {
 
     // Parents Info
     parentNames: "Sai Sindhuja & Nikhil",
+    parentNamesTelugu: "సాయి సింధుజ & నిఖిల్",
     babyTitle: "Our Little Miracle",
+    babyTitleTelugu: "మా చిట్టితల్లి",
     subtitle: "Something sweet is on the way...",
     subtitleTelugu: "శుభ సమయం ఆసన్నమైంది...",
 
     // Baby Name Details
     babyName: "Bujjiamma",
+    babyNameTelugu: "బుజ్జిఅమ్మ",
     babyGender: "Girl",
     nameMeaning: "An affectionate Telugu name meaning 'precious little one' or 'beloved daughter'.",
+    nameMeaningTelugu: "'బుజ్జి' అంటే ముద్దుల, 'అమ్మ' అంటే కూతురు. మా ముద్దుల కూతురు అని అర్థం.",
     birthMonthExpected: "September 2026",
 
     // South Indian Cultural Details
@@ -25,6 +29,7 @@ window.BabyRevealConfig = {
     nakshatraTelugu: "రోహిణి",                 // Telugu script for Nakshatra
     nameLanguage: "Telugu",                   // Language of name origin
     nameEtymology: "From Telugu — 'Bujji' means cute or tiny, and 'amma' is an endearing suffix for a daughter.",
+    nameEtymologyTelugu: "తెలుగు పదం — 'బుజ్జి' అంటే చిన్నది లేదా ముద్దుల, మరియు 'అమ్మ' అనేది ముద్దుపేరు.",
     blessingPhrase: "ఆయుష్మాన్ భవ",           // Traditional Telugu blessing
     blessingTranslation: "May you live long and flourish",
     ceremonyType: "Nāmakaraṇa",                // Naming ceremony type
