@@ -434,6 +434,16 @@ body.theme-jasmine::before {
     transition: all 0.4s ease;
 }
 
+.parent-names-highlight {
+    font-family: var(--font-body);
+    font-weight: 700;
+    font-size: 1.8rem;
+    color: var(--primary-color);
+    display: block;
+    margin-top: 0.4rem;
+    letter-spacing: 0.5px;
+}
+
 .ceremony-label {
     font-size: 0.82rem;
     text-transform: uppercase;
@@ -460,6 +470,44 @@ body.theme-jasmine::before {
 
 .deepam-icon {
     animation: lampFlicker 2s ease-in-out infinite;
+}
+
+.location-btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.5rem;
+    background: var(--primary-light);
+    border: 1px solid var(--primary-color);
+    padding: 0.75rem 1.5rem;
+    border-radius: 50px;
+    text-decoration: none;
+    font-weight: 600;
+    font-size: 1.05rem;
+    color: var(--text-main);
+    box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+    transition: all 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
+}
+
+.location-btn:hover {
+    transform: translateY(-4px) scale(1.02);
+    box-shadow: 0 8px 25px var(--accent-glow);
+    background: var(--card-bg);
+    border-color: var(--accent-color);
+}
+
+.location-icon {
+    font-size: 1.25rem;
+    animation: bounce 2s infinite ease-in-out;
+}
+
+.baby-emoji {
+    font-size: 1.25rem;
+}
+
+@keyframes bounce {
+    0%, 100% { transform: translateY(0); }
+    50%      { transform: translateY(-4px); }
 }
 
 /* ==========================================================================

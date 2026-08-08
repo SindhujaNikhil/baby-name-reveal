@@ -47,7 +47,7 @@ document.addEventListener('DOMContentLoaded', () => {
     if (parentNamesEl) {
         parentNamesEl.setAttribute('data-en', config.parentNames);
         parentNamesEl.setAttribute('data-te', config.parentNamesTelugu || config.parentNames);
-        parentNamesEl.textContent = config.parentNames;
+        parentNamesEl.innerHTML = config.parentNames;
     }
     if (heroTitleEl) {
         heroTitleEl.setAttribute('data-en', config.babyTitle);
@@ -62,6 +62,19 @@ document.addEventListener('DOMContentLoaded', () => {
     if (revealDateDisplay) {
         const options = { month: 'long', day: 'numeric', year: 'numeric', hour: '2-digit', minute: '2-digit' };
         revealDateDisplay.textContent = targetDate.toLocaleDateString('en-US', options);
+    }
+
+    // Location Setup
+    const locationBtn = document.getElementById('event-location-btn');
+    const addressEl = document.getElementById('event-address');
+    if (locationBtn && config.eventLocationUrl) {
+        locationBtn.href = config.eventLocationUrl;
+        if (addressEl && config.eventAddress) {
+            addressEl.textContent = config.eventAddress;
+        }
+    } else if (locationBtn) {
+        locationBtn.style.display = 'none';
+        if (addressEl) addressEl.style.display = 'none';
     }
 
     // 3. Theme Toggle Setup
@@ -86,7 +99,7 @@ document.addEventListener('DOMContentLoaded', () => {
     function updateLanguage() {
         const elements = document.querySelectorAll('[data-en][data-te]');
         elements.forEach(el => {
-            el.textContent = currentLang === 'en' ? el.getAttribute('data-en') : el.getAttribute('data-te');
+            el.innerHTML = currentLang === 'en' ? el.getAttribute('data-en') : el.getAttribute('data-te');
         });
         langBtn.textContent = currentLang === 'en' ? 'తె' : 'EN';
     }
@@ -211,10 +224,43 @@ document.addEventListener('DOMContentLoaded', () => {
         }
     }
 
+    const bgAudio = document.getElementById('bg-audio');
+    let hasInteracted = false;
+
+    // Start BG audio on first interaction
+    document.addEventListener('click', () => {
+        if (!hasInteracted && soundEnabled && bgAudio && !songIsPlaying) {
+            bgAudio.volume = config.bgVolume !== undefined ? config.bgVolume : 0.2;
+            bgAudio.play().catch(e => console.log('BG audio play prevented', e));
+            hasInteracted = true;
+        }
+    }, { once: true });
+
     if (soundBtn) {
         soundBtn.addEventListener('click', () => {
             soundEnabled = !soundEnabled;
             soundBtn.textContent = soundEnabled ? '🎵' : '🔇';
+            
+            if (bgAudio) {
+                if (soundEnabled && !songIsPlaying && hasInteracted) {
+                    bgAudio.play().catch(e => {});
+                } else {
+                    bgAudio.pause();
+                }
+            }
+            
+            const bujjiAudio = document.getElementById('bujji-audio');
+            if (bujjiAudio && !soundEnabled && songIsPlaying) {
+                const playBtn  = document.getElementById('song-play-btn');
+                const playIcon = document.getElementById('play-icon');
+                const btnLabel = document.getElementById('song-btn-label');
+                
+                bujjiAudio.pause();
+                songIsPlaying = false;
+                if (playIcon) playIcon.textContent = '▶';
+                if (btnLabel) btnLabel.textContent = 'Play My Favourite Song';
+                if (playBtn) playBtn.classList.remove('is-playing');
+            }
         });
     }
 
@@ -362,16 +408,27 @@ document.addEventListener('DOMContentLoaded', () => {
     const playIcon = document.getElementById('play-icon');
     const btnLabel = document.getElementById('song-btn-label');
     const audio    = document.getElementById('bujji-audio');
+    
+    if (audio) {
+        audio.volume = config.songVolume !== undefined ? config.songVolume : 1.0;
+    }
+
+    const bgAudio  = document.getElementById('bg-audio');
 
     if (!playBtn || !audio) return;
 
     function toggleAudio() {
         if (audio.paused) {
+            if (bgAudio) bgAudio.pause();
             audio.play().then(() => {
                 songIsPlaying = true;
                 if (playIcon) playIcon.textContent = '⏸';
                 if (btnLabel) btnLabel.textContent = 'Pause Song';
                 playBtn.classList.add('is-playing');
+                if (!soundEnabled && soundBtn) {
+                    soundEnabled = true;
+                    soundBtn.textContent = '🎵';
+                }
             }).catch(err => {
                 console.warn('Audio play failed:', err);
             });
@@ -381,6 +438,9 @@ document.addEventListener('DOMContentLoaded', () => {
             if (playIcon) playIcon.textContent = '▶';
             if (btnLabel) btnLabel.textContent = 'Play My Favourite Song';
             playBtn.classList.remove('is-playing');
+            if (soundEnabled && bgAudio) {
+                bgAudio.play().catch(e => {});
+            }
         }
     }
 
@@ -445,14 +505,16 @@ document.addEventListener('DOMContentLoaded', () => {
 (function () {
     // Authentic vector path for a realistic baby foot (left foot; right foot mirrored via CSS scaleX)
     const FOOT_SVG = `<svg viewBox="0 0 40 60" xmlns="http://www.w3.org/2000/svg">
-        <!-- Baby foot sole curve (heel, arch, ball) -->
-        <path d="M 20 56 C 12 56 9 46 11 36 C 13 26 9 19 15 13 C 20 8 28 10 32 16 C 36 22 34 33 32 41 C 30 50 26 56 20 56 Z"/>
-        <!-- 5 distinct organic arced toes -->
-        <circle cx="9"  cy="9"  r="4.5"/>
-        <circle cx="17" cy="5"  r="3.6"/>
-        <circle cx="24" cy="6"  r="3.2"/>
-        <circle cx="30" cy="10" r="2.8"/>
-        <circle cx="34" cy="16" r="2.4"/>
+        <!-- Baby foot sole curve -->
+        <path fill="rgba(255, 182, 193, 0.6)" d="M 20 56 C 12 56 9 46 11 36 C 13 26 9 19 15 13 C 20 8 28 10 32 16 C 36 22 34 33 32 41 C 30 50 26 56 20 56 Z"/>
+        <!-- Cute heart in the middle -->
+        <path fill="rgba(255, 105, 180, 0.7)" d="M 20 38 C 17 35 15 32 15 29 C 15 25 20 22 20 25 C 20 22 25 25 25 29 C 25 32 23 35 20 38 Z" />
+        <!-- Toes -->
+        <circle fill="rgba(255, 182, 193, 0.6)" cx="9"  cy="9"  r="4.5"/>
+        <circle fill="rgba(255, 182, 193, 0.6)" cx="17" cy="5"  r="3.6"/>
+        <circle fill="rgba(255, 182, 193, 0.6)" cx="24" cy="6"  r="3.2"/>
+        <circle fill="rgba(255, 182, 193, 0.6)" cx="30" cy="10" r="2.8"/>
+        <circle fill="rgba(255, 182, 193, 0.6)" cx="34" cy="16" r="2.4"/>
     </svg>`;
 
     const STEP_PX       = 240;  // scroll pixels between each footprint (gentle pace)

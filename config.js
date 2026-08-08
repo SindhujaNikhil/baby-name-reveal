@@ -9,12 +9,16 @@ window.BabyRevealConfig = {
     revealDate: "2026-08-16T12:30:00",
 
     // Parents Info
-    parentNames: "My Loving Parents: Sai Sindhuja & Nikhil Kumar",
-    parentNamesTelugu: "నా తల్లిదండ్రులు: సాయి సింధూజ & నిఖిల్ కుమార్",
+    parentNames: "My Loving Parents:<br><span class=\"parent-names-highlight\">Sai Sindhuja & Nikhil Kumar</span>",
+    parentNamesTelugu: "నా తల్లిదండ్రులు:<br><span class=\"parent-names-highlight\">సాయి సింధూజ & నిఖిల్ కుమార్</span>",
     babyTitle: "Hi, I'm Your Little Princess!",
     babyTitleTelugu: "నమస్తే! నేను మీ చిట్టితల్లిని",
     subtitle: "My name will be revealed on",
     subtitleTelugu: "నా పేరు చెప్పే సమయం ఆసన్నమైంది...",
+
+    // Event Location
+    eventLocationUrl: "https://www.google.com/maps/dir//AVOPA+Seva+Sadan,+Roja+Darga+Street+near+railway+track,+tungabadra,+Postal+Colony,+Kurnool,+Andhra+Pradesh+518004,+India/@15.8212582,78.0437213,14z/data=!4m8!4m7!1m0!1m5!1m1!1s0x3bb5e7414e2ef4a9:0x7c2fc2874d6c1fb1!2m2!1d78.0371629!2d15.8431095!5m1!1e4?entry=ttu&g_ep=EgoyMDI2MDgwNS4xIKXMDSoASAFQAw%3D%3D", // Added the exact Google Maps link
+    eventAddress: "AVOPA Seva Sadan, Postal Colony, Kurnool.",
 
     // Baby Name Details
     babyName: "Venkata Madhuraadhya",
@@ -42,6 +46,10 @@ window.BabyRevealConfig = {
 
     // Secret Preview Code (Default: "reveal123" or press Shift + P)
     secretCode: "reveal123",
+
+    // Global Volumes (0.0 to 1.0)
+    bgVolume: 0.2,    // Background music volume
+    songVolume: 1.0,  // Favourite song volume
 
     // Baby's Likes & Dislikes
     babyLikes: [

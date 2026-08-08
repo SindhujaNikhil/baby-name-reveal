@@ -51,6 +51,7 @@
 
         <header class="top-bar" style="justify-content: flex-end; margin-bottom: 2rem;">
             <div class="controls-group">
+                <button id="sound-btn" class="icon-btn" title="Toggle Sound">🎵</button>
                 <button id="lang-btn" class="icon-btn lang-btn" title="Toggle Language">తె</button>
             </div>
         </header>
@@ -74,19 +75,26 @@
 
             <h1 id="hero-title" class="hero-title">Hi, I'm Your Little Miracle!</h1>
 
-            <p id="hero-subtitle" class="hero-subtitle" data-en="I'm counting down to my name reveal!"
-                data-te="నా పేరు చెప్పే సమయం ఆసన్నమైంది...">
-                I'm counting down to my name reveal!
-            </p>
-
             <div class="ceremony-label" id="ceremony-label" data-en="My Nāmakaraṇa Celebration"
                 data-te="నా నామకరణం ఉత్సవం">
                 My Nāmakaraṇa Celebration
             </div>
 
+
+
             <div class="date-pill">
                 <span class="deepam-icon">🪔</span>
                 <span id="reveal-date-display">August 16, 2026</span>
+            </div>
+
+            <!-- Baby's Location Share -->
+            <div class="location-share-container" style="margin-top: 1.5rem;">
+                <a id="event-location-btn" href="#" target="_blank" class="location-btn">
+                    <span class="location-icon">📍</span>
+                    <span id="location-text" data-en="I'll be waiting for you here!" data-te="నేను మీ కోసం ఇక్కడ ఎదురుచూస్తూ ఉంటాను!">I'll be waiting for you here!</span>
+                    <span class="baby-emoji">👶</span>
+                </a>
+                <div id="event-address" class="event-address" style="margin-top: 0.8rem; font-size: 0.95rem; color: var(--text-muted); padding: 0 1rem; line-height: 1.4; font-weight: 500;"></div>
             </div>
         </section>
 
@@ -217,6 +225,9 @@
                 </div>
             </div>
         </section>
+
+        <!-- Global Audio Elements -->
+        <audio id="bg-audio" src="assets/natural-bg.mpeg" loop preload="auto"></audio>
 
         <!-- Footer -->
         <footer>
