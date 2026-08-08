@@ -2,6 +2,8 @@
  * Baby Name Reveal - South Indian Nāmakaraṇa Logic
  */
 
+let songIsPlaying = false;
+
 document.addEventListener('DOMContentLoaded', () => {
     // 1. Initialize Configuration
     const config = window.BabyRevealConfig;
@@ -395,15 +397,10 @@ document.addEventListener('DOMContentLoaded', () => {
             triggerReveal();
         }
     });
-});
 
-/* ==========================================================================
-   Bujji Meka — Native HTML5 Audio Player
-   ========================================================================== */
-
-let songIsPlaying = false;
-
-document.addEventListener('DOMContentLoaded', () => {
+    /* ==========================================================================
+       Bujji Meka — Native HTML5 Audio Player
+       ========================================================================== */
     const playBtn  = document.getElementById('song-play-btn');
     const playIcon = document.getElementById('play-icon');
     const btnLabel = document.getElementById('song-btn-label');
@@ -413,27 +410,35 @@ document.addEventListener('DOMContentLoaded', () => {
         audio.volume = config.songVolume !== undefined ? config.songVolume : 1.0;
     }
 
-    const bgAudio  = document.getElementById('bg-audio');
-
-    if (!playBtn || !audio) return;
-
-    function toggleAudio() {
-        if (audio.paused) {
-            if (bgAudio) bgAudio.pause();
-            audio.play().then(() => {
-                songIsPlaying = true;
-                if (playIcon) playIcon.textContent = '⏸';
-                if (btnLabel) btnLabel.textContent = 'Pause Song';
-                playBtn.classList.add('is-playing');
-                if (!soundEnabled && soundBtn) {
-                    soundEnabled = true;
-                    soundBtn.textContent = '🎵';
+    if (playBtn && audio) {
+        playBtn.addEventListener('click', () => {
+            if (audio.paused) {
+                if (bgAudio) bgAudio.pause();
+                audio.play().then(() => {
+                    songIsPlaying = true;
+                    if (playIcon) playIcon.textContent = '⏸';
+                    if (btnLabel) btnLabel.textContent = 'Pause Song';
+                    playBtn.classList.add('is-playing');
+                    if (!soundEnabled && soundBtn) {
+                        soundEnabled = true;
+                        soundBtn.textContent = '🎵';
+                    }
+                }).catch(err => {
+                    console.warn('Audio play failed:', err);
+                });
+            } else {
+                audio.pause();
+                songIsPlaying = false;
+                if (playIcon) playIcon.textContent = '▶';
+                if (btnLabel) btnLabel.textContent = 'Play My Favourite Song';
+                playBtn.classList.remove('is-playing');
+                if (soundEnabled && bgAudio) {
+                    bgAudio.play().catch(e => {});
                 }
-            }).catch(err => {
-                console.warn('Audio play failed:', err);
-            });
-        } else {
-            audio.pause();
+            }
+        });
+
+        audio.addEventListener('ended', () => {
             songIsPlaying = false;
             if (playIcon) playIcon.textContent = '▶';
             if (btnLabel) btnLabel.textContent = 'Play My Favourite Song';
@@ -441,17 +446,8 @@ document.addEventListener('DOMContentLoaded', () => {
             if (soundEnabled && bgAudio) {
                 bgAudio.play().catch(e => {});
             }
-        }
+        });
     }
-
-    playBtn.addEventListener('click', toggleAudio);
-
-    audio.addEventListener('ended', () => {
-        songIsPlaying = false;
-        if (playIcon) playIcon.textContent = '▶';
-        if (btnLabel) btnLabel.textContent = 'Play My Favourite Song';
-        playBtn.classList.remove('is-playing');
-    });
 });
 
 /* ==========================================================================

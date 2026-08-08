@@ -48,7 +48,7 @@ window.BabyRevealConfig = {
     secretCode: "reveal123",
 
     // Global Volumes (0.0 to 1.0)
-    bgVolume: 0.2,    // Background music volume
+    bgVolume: 0.05,   // Background music volume
     songVolume: 1.0,  // Favourite song volume
 
     // Baby's Likes & Dislikes
