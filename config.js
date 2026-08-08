@@ -18,10 +18,10 @@ window.BabyRevealConfig = {
 
     // Baby Name Details
     babyName: "Venkata Madhuraadhya",
-    babyNameTelugu: "వేంకట మధురాధ్య",
+    babyNameTelugu: "వెంకట మధురాధ్య",
     babyGender: "Girl",
-    nameMeaning: "Our Sweetest Mah Durga",
-    nameMeaningTelugu: "మా అత్యంత ముద్దుల మహాదుర్గ",
+    nameMeaning: "Our Sweetest Mah Durga.",
+    nameMeaningTelugu: "మా ముద్దుల దుర్గా దేవి",
     birthMonthExpected: "September 2026",
 
     // South Indian Cultural Details
