@@ -17,21 +17,19 @@ window.BabyRevealConfig = {
     subtitleTelugu: "నా పేరు చెప్పే సమయం ఆసన్నమైంది...",
 
     // Baby Name Details
-    babyName: "Bujjiamma",
-    babyNameTelugu: "బుజ్జిఅమ్మ",
+    babyName: "Venkata Madhuraadhya",
+    babyNameTelugu: "వేంకట మధురాధ్య",
     babyGender: "Girl",
-    nameMeaning: "An affectionate Telugu name meaning 'precious little one' or 'beloved daughter'.",
-    nameMeaningTelugu: "'బుజ్జి' అంటే ముద్దుల, 'అమ్మ' అంటే కూతురు. మా ముద్దుల కూతురు అని అర్థం.",
+    nameMeaning: "Our Sweetest Mah Durga",
+    nameMeaningTelugu: "మా అత్యంత ముద్దుల మహాదుర్గ",
     birthMonthExpected: "September 2026",
 
     // South Indian Cultural Details
     nakshatra: "Rohini",                        // Birth star (Nakshatra)
     nakshatraTelugu: "రోహిణి",                 // Telugu script for Nakshatra
     nameLanguage: "Telugu",                   // Language of name origin
-    nameEtymology: "From Telugu — 'Bujji' means cute or tiny, and 'amma' is an endearing suffix for a daughter.",
-    nameEtymologyTelugu: "తెలుగు పదం — 'బుజ్జి' అంటే చిన్నది లేదా ముద్దుల, మరియు 'అమ్మ' అనేది ముద్దుపేరు.",
-    blessingPhrase: "ఆయుష్మాన్ భవ",           // Traditional Telugu blessing
-    blessingTranslation: "May you live long and flourish",
+    nameEtymology: "From Sanskrit / Telugu — 'Madhura' signifies sweetness, melody, and grace.",
+    nameEtymologyTelugu: "సంస్కృతం/తెలుగు పదం — 'మధుర' అంటే తియ్యనైన మరియు శ్రావ్యమైన.",
     ceremonyType: "Nāmakaraṇa",                // Naming ceremony type
     ceremonyTypeTelugu: "నామకరణం",
 
@@ -61,5 +59,6 @@ window.BabyRevealConfig = {
     babyImageSad: "assets/bujjiamma_sad.png",     // Shown next to dislikes
 
     // Social / Share Settings
+    shareImage: "assets/baby_mystery.png",
     shareMessage: "Count down with me to my Nāmakaraṇa — revealing my name on August 16! 🪔✨",
 };
