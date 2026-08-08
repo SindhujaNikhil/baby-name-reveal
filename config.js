@@ -45,6 +45,21 @@ window.BabyRevealConfig = {
     // Secret Preview Code (Default: "reveal123" or press Shift + P)
     secretCode: "reveal123",
 
+    // Baby's Likes & Dislikes
+    babyLikes: [
+        { emoji: "💧", text: "Playing with water" },
+        { emoji: "🐐", text: "Bujji Meka song" },
+        { emoji: "🌀", text: "Fans spinning" },
+        { emoji: "💡", text: "Bright lights" },
+    ],
+    babyDislikes: [
+        { emoji: "🙅", text: "Touching her face" },
+        { emoji: "👕", text: "Wet clothes" },
+        { emoji: "🌸", text: "Perfumes" },
+    ],
+    babyImageHappy: "assets/bujjiamma_happy.png",   // Shown next to likes
+    babyImageSad:   "assets/bujjiamma_sad.png",     // Shown next to dislikes
+
     // Social / Share Settings
     shareMessage: "Join us for our Nāmakaraṇa countdown — revealing our baby's name on August 16! 🪔✨",
 };

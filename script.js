@@ -350,3 +350,224 @@ document.addEventListener('DOMContentLoaded', () => {
         }
     });
 });
+
+/* ==========================================================================
+   Bujji Meka — YouTube Audio Player
+   ========================================================================== */
+
+let ytPlayer = null;
+let songIsPlaying = false;
+let ytPlayerReady = false;
+
+// Called automatically by the YouTube IFrame API once it loads
+function onYouTubeIframeAPIReady() {
+    ytPlayer = new YT.Player('yt-player', {
+        height: '180',
+        width: '320',
+        videoId: 'OFkrRdh1YtY',   // Infobells — Bujji Meka Bujji Meka Telugu Rhyme
+        playerVars: {
+            autoplay: 0,
+            controls: 0,
+            modestbranding: 1,
+            rel: 0,
+            playsinline: 1,
+            origin: window.location.origin || '*',
+        },
+        events: {
+            onReady: function() { ytPlayerReady = true; },
+            onStateChange: onSongStateChange,
+            onError: function(e) {
+                console.warn('YT player error:', e.data);
+                const btnLabel = document.getElementById('song-btn-label');
+                if (btnLabel) btnLabel.textContent = 'Play My Favourite Song';
+            }
+        }
+    });
+}
+
+function onSongStateChange(event) {
+    const playBtn    = document.getElementById('song-play-btn');
+    const playIcon   = document.getElementById('play-icon');
+    const btnLabel   = document.getElementById('song-btn-label');
+    const lyricsCard = document.getElementById('song-lyrics-card');
+
+    if (!playBtn) return;
+
+    if (event.data === YT.PlayerState.PLAYING) {
+        songIsPlaying = true;
+        playIcon.textContent = '⏸';
+        btnLabel.textContent = 'Pause Song';
+        playBtn.classList.add('is-playing');
+        lyricsCard.classList.add('visible');
+    } else if (event.data === YT.PlayerState.PAUSED || event.data === YT.PlayerState.ENDED) {
+        songIsPlaying = false;
+        playIcon.textContent = '▶';
+        btnLabel.textContent = 'Play My Favourite Song';
+        playBtn.classList.remove('is-playing');
+        if (event.data === YT.PlayerState.ENDED) {
+            lyricsCard.classList.remove('visible');
+        }
+    }
+}
+
+// Wire up the button click
+document.addEventListener('DOMContentLoaded', () => {
+    const playBtn = document.getElementById('song-play-btn');
+    const btnLabel = document.getElementById('song-btn-label');
+    if (playBtn) {
+        playBtn.addEventListener('click', () => {
+            if (!ytPlayer || !ytPlayerReady) {
+                // Player still loading — show feedback
+                if (btnLabel) btnLabel.textContent = 'Loading...';
+                return;
+            }
+            if (songIsPlaying) {
+                ytPlayer.pauseVideo();
+            } else {
+                ytPlayer.playVideo();
+            }
+        });
+    }
+});
+
+/* ==========================================================================
+   Baby's World — Likes & Dislikes Renderer
+   ========================================================================== */
+
+document.addEventListener('DOMContentLoaded', () => {
+    const config = window.BabyRevealConfig;
+    if (!config) return;
+
+    const likesList    = document.getElementById('likes-list');
+    const dislikesList = document.getElementById('dislikes-list');
+
+    function buildItems(list, items, type) {
+        if (!list || !items || !items.length) return;
+        list.innerHTML = '';
+        items.forEach((item, i) => {
+            const li = document.createElement('li');
+            li.className = `pref-item pref-item--${type}`;
+            li.style.animationDelay = `${i * 0.12}s`;
+            li.innerHTML = `
+                <span class="pref-emoji">${item.emoji}</span>
+                <span class="pref-text">${item.text}</span>
+            `;
+            list.appendChild(li);
+        });
+    }
+
+    buildItems(likesList,    config.babyLikes,    'like');
+    buildItems(dislikesList, config.babyDislikes, 'dislike');
+
+    // Intersection Observer: animate items when section scrolls into view
+    const section = document.getElementById('baby-world-section');
+    if (section && 'IntersectionObserver' in window) {
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    section.classList.add('in-view');
+                    observer.unobserve(section);
+                }
+            });
+        }, { threshold: 0.15 });
+        observer.observe(section);
+    }
+});
+
+/* ==========================================================================
+   Baby Footprints — Scroll Effect
+   ========================================================================== */
+
+(function () {
+    // SVG path for a baby foot (left foot; right is mirrored via CSS)
+    const FOOT_SVG = `<svg viewBox="0 0 30 44" xmlns="http://www.w3.org/2000/svg">
+        <!-- Heel -->
+        <ellipse cx="15" cy="36" rx="10" ry="8"/>
+        <!-- Ball of foot -->
+        <ellipse cx="15" cy="22" rx="8.5" ry="8"/>
+        <!-- Big toe -->
+        <ellipse cx="4"  cy="12" rx="4"   ry="3.5"/>
+        <!-- Toes -->
+        <ellipse cx="10" cy="7"  rx="3.4" ry="3.1"/>
+        <ellipse cx="17" cy="5"  rx="3.2" ry="3"/>
+        <ellipse cx="23" cy="7"  rx="3"   ry="2.8"/>
+        <ellipse cx="28" cy="12" rx="2.6" ry="2.4"/>
+    </svg>`;
+
+    const MARGIN        = 28;   // px from screen edge
+    const STEP_PX       = 100;  // scroll pixels between each footprint
+    const LINGER_MS     = 2500; // how long the print stays visible
+    const FADE_MS       = 800;  // fade-out duration (match CSS)
+    const MAX_PRINTS    = 60;   // cap to avoid DOM bloat
+
+    let lastScrollY     = window.scrollY;
+    let accumulated     = 0;
+    let stepIndex       = 0;
+    let activeCount     = 0;
+    let ticking         = false;
+
+    function spawnFootprint(scrollY) {
+        if (activeCount >= MAX_PRINTS) return;
+
+        const isLeft   = stepIndex % 2 === 0;
+        const side     = isLeft ? 'left' : 'right';
+        const rotate   = isLeft
+            ? (-20 + Math.random() * 18) + 'deg'   // left foot tilts left
+            : (20  - Math.random() * 18) + 'deg';  // right foot tilts right
+
+        // Vertical: random-ish position in the visible viewport
+        const topPct   = 20 + Math.random() * 60;  // 20%–80% of viewport height
+        const topPx    = topPct + 'vh';
+
+        const fp = document.createElement('div');
+        fp.className  = `baby-footprint ${isLeft ? 'footprint-left' : 'footprint-right'}`;
+        fp.innerHTML  = FOOT_SVG;
+        fp.style.setProperty('--fp-rotate', rotate);
+        fp.style[side] = MARGIN + 'px';
+        fp.style.top   = topPx;
+        fp.style.transform = `rotate(${rotate})`;
+
+        document.body.appendChild(fp);
+        activeCount++;
+        stepIndex++;
+
+        // Fade out after LINGER_MS
+        const fadeTimer = setTimeout(() => {
+            fp.classList.add('fading-out');
+            setTimeout(() => {
+                fp.remove();
+                activeCount--;
+            }, FADE_MS);
+        }, LINGER_MS);
+
+        // Safety cleanup
+        setTimeout(() => {
+            if (fp.parentNode) {
+                fp.remove();
+                activeCount = Math.max(0, activeCount - 1);
+            }
+            clearTimeout(fadeTimer);
+        }, LINGER_MS + FADE_MS + 200);
+    }
+
+    function onScroll() {
+        const currentY = window.scrollY;
+        const delta    = Math.abs(currentY - lastScrollY);
+        lastScrollY    = currentY;
+        accumulated   += delta;
+
+        while (accumulated >= STEP_PX) {
+            accumulated -= STEP_PX;
+            spawnFootprint(currentY);
+        }
+        ticking = false;
+    }
+
+    window.addEventListener('scroll', () => {
+        if (!ticking) {
+            requestAnimationFrame(onScroll);
+            ticking = true;
+        }
+    }, { passive: true });
+})();
+

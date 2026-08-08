@@ -17,6 +17,8 @@
     <link href="https://fonts.googleapis.com/css2?family=Rozha+One&family=Noto+Serif:ital,wght@0,400;0,600;0,700;1,400&family=Outfit:wght@300;400;500;600;700&family=Noto+Sans+Telugu:wght@400;600;700&display=swap" rel="stylesheet">
 
     <link rel="stylesheet" href="style.css">
+    <!-- YouTube IFrame API (for Bujji Meka audio player) -->
+    <script src="https://www.youtube.com/iframe_api"></script>
 </head>
 <body>
 
@@ -155,6 +157,93 @@
                 </div>
             </div>
         </div>
+
+        <!-- Bujji Meka Song Section (hidden — set display:block to re-enable) -->
+        <section class="song-section" id="song-section" style="display:none">
+            <div class="song-card">
+                <div class="song-goat-icon" aria-hidden="true">🐐</div>
+                <div class="song-info">
+                    <div class="song-title-telugu">బుజ్జి మేక బుజ్జి మేక</div>
+                    <div class="song-title-en">Our Baby's Favourite Rhyme</div>
+                </div>
+
+                <!-- Custom Play/Pause Button -->
+                <button id="song-play-btn" class="song-play-btn" title="Play My Favourite Song" aria-label="Play Bujji Meka song">
+                    <span class="play-icon" id="play-icon">▶</span>
+                    <span class="song-btn-label" id="song-btn-label">Play My Favourite Song</span>
+                </button>
+
+                <!-- Lyrics Card (shown when playing) -->
+                <div class="song-lyrics-card" id="song-lyrics-card">
+                    <div class="lyrics-line">బుజ్జి మేక బుజ్జి మేక యాడికెళ్తివి?</div>
+                    <div class="lyrics-translation">Little goat, little goat — where are you going?</div>
+                    <div class="lyrics-divider">✦</div>
+                    <div class="lyrics-line">రాజు గారి తోటలోన మేతకెళ్తిని...</div>
+                    <div class="lyrics-translation">To graze in the king's garden...</div>
+                    <div class="lyrics-divider">✦</div>
+                    <div class="lyrics-line">తోటమాలి కొట్ట వస్తే తుర్రుమంటిని!</div>
+                    <div class="lyrics-translation">When the gardener came to hit — I ran away!</div>
+                </div>
+
+                <!-- Hidden YouTube Audio Player (off-screen, needs real size to initialize) -->
+                <div id="yt-player-container" style="position:fixed;left:-9999px;top:-9999px;width:320px;height:180px;pointer-events:none;">
+                    <div id="yt-player"></div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Baby's World: Likes & Dislikes -->
+        <section class="baby-world-section" id="baby-world-section">
+            <div class="baby-world-card">
+                <div class="baby-world-header">
+                    <span class="baby-world-icon">🌟</span>
+                    <h2 class="baby-world-title" data-en="Bujjiamma's World" data-te="బుజ్జిఅమ్మ ప్రపంచం">Bujjiamma's World</h2>
+                    <span class="baby-world-icon">🌟</span>
+                </div>
+                <p class="baby-world-subtitle" data-en="Little things that make her smile & frown" data-te="ఆమె నవ్వించే మరియు విసుగు కలిగించే చిన్ని విషయాలు">
+                    Little things that make her smile &amp; frown
+                </p>
+
+                <div class="baby-world-columns">
+                    <!-- Likes -->
+                    <div class="baby-world-col likes-col">
+                        <div class="baby-face-wrap">
+                            <img id="baby-img-happy" class="baby-col-face baby-face-happy" src="assets/bujjiamma_happy.png" alt="Bujjiamma smiling" />
+                            <div class="baby-face-label likes-face-label">😄 She loves...</div>
+                        </div>
+                        <div class="col-header likes-header">
+                            <span class="col-emoji">💛</span>
+                            <span class="col-label" data-en="She Loves" data-te="ఆమె ఇష్టాలు">She Loves</span>
+                        </div>
+                        <ul class="preferences-list" id="likes-list">
+                            <!-- Populated by JS -->
+                        </ul>
+                    </div>
+
+                    <!-- Divider -->
+                    <div class="baby-world-divider" aria-hidden="true">
+                        <div class="divider-line"></div>
+                        <div class="divider-baby">👶</div>
+                        <div class="divider-line"></div>
+                    </div>
+
+                    <!-- Dislikes -->
+                    <div class="baby-world-col dislikes-col">
+                        <div class="baby-face-wrap">
+                            <img id="baby-img-sad" class="baby-col-face baby-face-sad" src="assets/bujjiamma_sad.png" alt="Bujjiamma pouting" />
+                            <div class="baby-face-label dislikes-face-label">😤 She hates...</div>
+                        </div>
+                        <div class="col-header dislikes-header">
+                            <span class="col-emoji">🙈</span>
+                            <span class="col-label" data-en="She Hates" data-te="ఆమె అయిష్టాలు">She Hates</span>
+                        </div>
+                        <ul class="preferences-list" id="dislikes-list">
+                            <!-- Populated by JS -->
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </section>
 
         <!-- Footer -->
         <footer>
