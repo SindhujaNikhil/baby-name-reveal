@@ -48,7 +48,7 @@ window.BabyRevealConfig = {
         { emoji: "💧", text: "Playing with water" },
         { emoji: "🐐", text: "Bujji Meka song" },
         { emoji: "🌀", text: "Fans spinning" },
-        { emoji: "💡", text: "Bright lights" },
+        { emoji: "💡", text: "Gazing at lights" },
     ],
     babyDislikes: [
         { emoji: "🙅", text: "Touching my face" },
