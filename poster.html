@@ -142,6 +142,41 @@
             }
             .print-btn { display: none; }
         }
+
+        @media (max-width: 600px) {
+            body {
+                padding: 1rem;
+            }
+            .poster-container {
+                padding: 2rem 1rem;
+                margin: 0 auto;
+            }
+            h1 {
+                font-size: 1.8rem;
+            }
+            p.subtitle {
+                font-size: 1rem;
+                margin-bottom: 1.5rem;
+            }
+            .scan-instruction {
+                font-size: 1.1rem;
+                margin-bottom: 0.75rem;
+            }
+            .qr-wrapper {
+                padding: 1rem;
+                margin-bottom: 1.5rem;
+            }
+            .qr-wrapper img {
+                width: 180px;
+                height: 180px;
+            }
+            .print-btn {
+                bottom: 1rem;
+                right: 1rem;
+                padding: 0.75rem 1.25rem;
+                font-size: 0.9rem;
+            }
+        }
     </style>
 </head>
 <body>
@@ -149,17 +184,17 @@
     <div class="poster-container">
         <div class="decorative-lamp">🪔</div>
         
-        <h1>Our Little Miracle is Here!</h1>
-        <p class="subtitle">Something sweet is on the way...</p>
-        
+        <h1>Hi, I'm Your Little Miracle!</h1>
+        <p class="subtitle">I'm counting down to my name reveal...</p>
+
         <div class="scan-instruction">Scan to discover my name! ✨</div>
-        
+
         <div class="qr-wrapper">
             <!-- Ensure this points to the QR code we downloaded -->
             <img src="baby_reveal_qr.png" alt="Scan me for the reveal">
         </div>
-        
-        <div class="parents-name">With love,<br>Sai Sindhuja & Nikhil</div>
+
+        <div class="parents-name">My Loving Parents:<br>Sai Sindhuja & Nikhil</div>
     </div>
 
     <button class="print-btn" onclick="window.print()">🖨️ Print Poster</button>

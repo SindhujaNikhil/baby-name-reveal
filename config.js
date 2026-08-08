@@ -9,12 +9,12 @@ window.BabyRevealConfig = {
     revealDate: "2026-08-16T12:30:00",
 
     // Parents Info
-    parentNames: "Sai Sindhuja & Nikhil",
-    parentNamesTelugu: "సాయి సింధుజ & నిఖిల్",
-    babyTitle: "Our Little Miracle",
-    babyTitleTelugu: "మా చిట్టితల్లి",
-    subtitle: "Something sweet is on the way...",
-    subtitleTelugu: "శుభ సమయం ఆసన్నమైంది...",
+    parentNames: "My Loving Parents: Sai Sindhuja & Nikhil Kumar",
+    parentNamesTelugu: "నా తల్లిదండ్రులు: సాయి సింధూజ & నిఖిల్ కుమార్",
+    babyTitle: "Hi, I'm Your Little Princess!",
+    babyTitleTelugu: "నమస్తే! నేను మీ చిట్టితల్లిని",
+    subtitle: "My name will be revealed on",
+    subtitleTelugu: "నా పేరు చెప్పే సమయం ఆసన్నమైంది...",
 
     // Baby Name Details
     babyName: "Bujjiamma",
@@ -36,11 +36,11 @@ window.BabyRevealConfig = {
     ceremonyTypeTelugu: "నామకరణం",
 
     // Hero Images (Two-state)
-    heroImageMystery: "assets/baby_mystery.png",   // Shown during countdown
+    heroImageMystery: "assets/baby_mystery.png",   // Shown during countdowon
     heroImageReveal: "assets/baby_reveal.png",      // Shown after reveal
 
-    // Theme: "temple" (Temple Gold), "silk" (Kanchipuram Silk), "jasmine" (Jasmine Garden)
-    defaultTheme: "temple",
+    // Theme: "rose" (Baby Rose), "temple" (Temple Gold), "silk" (Kanchipuram Silk), "jasmine" (Jasmine Garden)
+    defaultTheme: "rose",
 
     // Secret Preview Code (Default: "reveal123" or press Shift + P)
     secretCode: "reveal123",
@@ -53,13 +53,13 @@ window.BabyRevealConfig = {
         { emoji: "💡", text: "Bright lights" },
     ],
     babyDislikes: [
-        { emoji: "🙅", text: "Touching her face" },
+        { emoji: "🙅", text: "Touching my face" },
         { emoji: "👕", text: "Wet clothes" },
         { emoji: "🌸", text: "Perfumes" },
     ],
     babyImageHappy: "assets/bujjiamma_happy.png",   // Shown next to likes
-    babyImageSad:   "assets/bujjiamma_sad.png",     // Shown next to dislikes
+    babyImageSad: "assets/bujjiamma_sad.png",     // Shown next to dislikes
 
     // Social / Share Settings
-    shareMessage: "Join us for our Nāmakaraṇa countdown — revealing our baby's name on August 16! 🪔✨",
+    shareMessage: "Count down with me to my Nāmakaraṇa — revealing my name on August 16! 🪔✨",
 };

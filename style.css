@@ -8,45 +8,70 @@
    Color Tokens & Theme System
    ========================================================================== */
 
-:root {
+:root, body.theme-rose {
     --font-heading: 'Rozha One', serif;
     --font-serif: 'Noto Serif', serif;
     --font-body: 'Outfit', sans-serif;
     --font-telugu: 'Noto Sans Telugu', sans-serif;
 
-    /* === TEMPLE GOLD THEME (Default) === */
-    /* Deep maroon background, turmeric gold accents, saffron highlights */
-    --bg-deep:        #1a0a0a;
-    --bg-mid:         #2d1212;
-    --bg-light:       #3d1f1f;
+    /* === BABY ROSE THEME (Default Bright Pastel Theme) === */
+    /* Soft baby rose background, rose gold & pastel pink accents, rich plum text */
+    --bg-deep:        #fff0f5;    /* Lavender blush / soft baby pink */
+    --bg-mid:         #fce7f3;    /* Gentle rose pastel */
+    --bg-light:       #fbcfe8;    /* Soft pink highlight */
 
-    --primary-color:  #d4891a;    /* Turmeric gold */
-    --primary-hover:  #e8a020;
-    --primary-light:  rgba(212, 137, 26, 0.15);
-    --accent-color:   #f4900c;    /* Saffron orange */
-    --accent-glow:    rgba(244, 144, 12, 0.45);
+    --primary-color:  #e11d48;    /* Bright Rose Gold / Vivid Pink */
+    --primary-hover:  #be123c;
+    --primary-light:  rgba(225, 29, 72, 0.12);
+    --accent-color:   #db2777;    /* Deep Magenta Pink */
+    --accent-glow:    rgba(219, 39, 119, 0.35);
 
-    --gold-shimmer:   #f5c842;
-    --kumkum:         #c0392b;
-    --jasmine-white:  #fff9f0;
+    --gold-shimmer:   #d97706;    /* Warm gold accent */
+    --kumkum:         #e11d48;
+    --jasmine-white:  #ffffff;
 
-    --card-bg:        rgba(45, 18, 18, 0.75);
-    --card-border:    rgba(212, 137, 26, 0.35);
-    --card-shadow:    0 20px 60px rgba(0, 0, 0, 0.5), 0 0 0 1px rgba(212,137,26,0.15);
+    --card-bg:        rgba(255, 255, 255, 0.90);
+    --card-border:    rgba(244, 114, 182, 0.38);
+    --card-shadow:    0 16px 45px rgba(225, 29, 72, 0.09), 0 2px 10px rgba(0,0,0,0.03);
 
-    --text-main:      #fff3e0;
-    --text-muted:     #c8a87a;
-    --text-light:     #9a7a55;
-    --text-gold:      #f5c842;
+    --text-main:      #3b0764;    /* Deep rich plum/navy for ultra crisp 100% legibility */
+    --text-muted:     #831843;    /* Soft burgundy text */
+    --text-light:     #be123c;
+    --text-gold:      #b45309;
 
-    --timer-bg:       rgba(26, 10, 10, 0.85);
-    --timer-border:   rgba(212, 137, 26, 0.5);
-    --timer-num-color: #f5c842;
-    --timer-shadow:   0 8px 32px rgba(244, 144, 12, 0.2), inset 0 1px 0 rgba(245, 200, 66, 0.1);
+    --timer-bg:       rgba(255, 255, 255, 0.95);
+    --timer-border:   rgba(244, 114, 182, 0.45);
+    --timer-num-color: #9f1239;
+    --timer-shadow:   0 10px 30px rgba(225, 29, 72, 0.12), inset 0 1px 0 rgba(255, 255, 255, 1);
 
     --radius-lg: 24px;
     --radius-md: 16px;
     --radius-sm: 10px;
+}
+
+/* === TEMPLE GOLD THEME === */
+body.theme-temple {
+    --bg-deep:        #1a0a0a;
+    --bg-mid:         #2d1212;
+    --bg-light:       #3d1f1f;
+    --primary-color:  #d4891a;
+    --primary-hover:  #e8a020;
+    --primary-light:  rgba(212, 137, 26, 0.15);
+    --accent-color:   #f4900c;
+    --accent-glow:    rgba(244, 144, 12, 0.45);
+    --gold-shimmer:   #f5c842;
+    --kumkum:         #c0392b;
+    --card-bg:        rgba(45, 18, 18, 0.75);
+    --card-border:    rgba(212, 137, 26, 0.35);
+    --card-shadow:    0 20px 60px rgba(0, 0, 0, 0.5), 0 0 0 1px rgba(212,137,26,0.15);
+    --text-main:      #fff3e0;
+    --text-muted:     #c8a87a;
+    --text-light:     #9a7a55;
+    --text-gold:      #f5c842;
+    --timer-bg:       rgba(26, 10, 10, 0.85);
+    --timer-border:   rgba(212, 137, 26, 0.5);
+    --timer-num-color: #f5c842;
+    --timer-shadow:   0 8px 32px rgba(244, 144, 12, 0.2), inset 0 1px 0 rgba(245, 200, 66, 0.1);
 }
 
 /* === KANCHIPURAM SILK THEME === */
@@ -108,6 +133,11 @@ body.theme-jasmine {
     margin: 0;
     padding: 0;
     box-sizing: border-box;
+    -webkit-tap-highlight-color: transparent;
+}
+
+button, input, select, .icon-btn, .song-play-btn, .modal-btn, .secret-trigger {
+    touch-action: manipulation;
 }
 
 html {
@@ -387,7 +417,7 @@ body.theme-jasmine::before {
 
 .hero-title {
     font-family: var(--font-heading);
-    font-size: 2.8rem;
+    font-size: clamp(1.75rem, 5.5vw, 2.8rem);
     font-weight: 400; /* Rozha One is naturally bold */
     color: var(--text-main);
     margin-bottom: 0.5rem;
@@ -588,7 +618,7 @@ body.theme-jasmine::before {
 
 .revealed-name {
     font-family: var(--font-heading);
-    font-size: 4rem;
+    font-size: clamp(2.1rem, 8.5vw, 4rem);
     font-weight: 400;
     background: linear-gradient(135deg, var(--text-gold), var(--primary-color), var(--accent-color));
     -webkit-background-clip: text;
@@ -942,29 +972,29 @@ kbd {
 }
 
 /* ==========================================================================
-   Responsive
+   Responsive & Mobile Optimizations
    ========================================================================== */
 
 @media (max-width: 768px) {
     .container {
-        padding-top: 3rem;
+        padding: calc(3rem + env(safe-area-inset-top, 0px)) 1.25rem calc(2rem + env(safe-area-inset-bottom, 0px));
     }
 
-    .hero-title {
-        font-size: 2.2rem;
+    .hero-card {
+        padding: 2rem 1.25rem 1.5rem;
     }
 
     .countdown-container {
         grid-template-columns: repeat(2, 1fr);
-        gap: 1rem;
+        gap: 0.85rem;
+    }
+
+    .time-box {
+        padding: 1.25rem 0.5rem 1rem;
     }
 
     .number-wrapper {
-        font-size: 2.6rem;
-    }
-
-    .revealed-name {
-        font-size: 2.8rem;
+        font-size: 2.5rem;
     }
 
     .poll-grid {
@@ -978,11 +1008,86 @@ kbd {
     .hero-banner-img {
         max-width: 220px;
     }
+
+    .reveal-card {
+        padding: 2.5rem 1.25rem 1.75rem;
+    }
+}
+
+@media (max-width: 640px) {
+    .baby-world-columns {
+        grid-template-columns: 1fr;
+        gap: 1.5rem;
+    }
+    .baby-world-divider {
+        flex-direction: row !important;
+        height: auto !important;
+        padding: 0 !important;
+        margin: 0.25rem 0;
+    }
+    .baby-world-divider .divider-line {
+        height: 1px !important;
+        width: 100% !important;
+    }
+    .baby-world-card {
+        padding: 1.5rem 1rem;
+    }
 }
 
 @media (max-width: 480px) {
-    .hero-title {
-        font-size: 1.9rem;
+    .container {
+        padding: calc(2.75rem + env(safe-area-inset-top, 0px)) 0.85rem calc(1.5rem + env(safe-area-inset-bottom, 0px));
+    }
+
+    .hero-card {
+        padding: 1.5rem 0.85rem 1.25rem;
+        border-radius: var(--radius-md);
+    }
+
+    .hero-banner-img {
+        max-width: 180px;
+        margin-bottom: 1rem;
+    }
+
+    .parents-invitation {
+        font-size: 1rem !important;
+    }
+
+    .hero-subtitle {
+        font-size: 0.98rem;
+    }
+
+    .ceremony-label {
+        font-size: 0.75rem;
+        letter-spacing: 2px;
+    }
+
+    .date-pill {
+        padding: 0.5rem 1.1rem;
+        font-size: 0.88rem;
+    }
+
+    .countdown-container {
+        gap: 0.65rem;
+    }
+
+    .time-box {
+        padding: 1rem 0.35rem 0.85rem;
+        border-radius: var(--radius-sm);
+    }
+
+    .deepam-top {
+        font-size: 1.1rem;
+        margin-bottom: 0.25rem;
+    }
+
+    .number-wrapper {
+        font-size: 2.1rem;
+    }
+
+    .label {
+        font-size: 0.7rem;
+        letter-spacing: 1px;
     }
 
     .torana-leaves {
@@ -990,8 +1095,100 @@ kbd {
     }
 
     .kolam-ring {
-        gap: 0.4rem;
-        font-size: 0.85rem;
+        gap: 0.35rem;
+        font-size: 0.8rem;
+    }
+
+    .name-meaning-box {
+        padding: 0.9rem 1rem;
+        font-size: 0.92rem;
+    }
+
+    .cultural-row {
+        padding: 0.85rem 0.9rem;
+        gap: 0.75rem;
+    }
+
+    .cultural-icon {
+        font-size: 1.25rem;
+    }
+
+    .cultural-value {
+        font-size: 0.95rem;
+    }
+
+    .blessing-block {
+        padding: 1rem 0.85rem;
+    }
+
+    .blessing-telugu {
+        font-size: 1.3rem;
+    }
+
+    .blessing-english {
+        font-size: 0.88rem;
+    }
+
+    .song-section {
+        padding: 0 0.25rem;
+    }
+
+    .song-card {
+        padding: 1.5rem 1rem;
+    }
+
+    .song-play-btn {
+        width: 100%;
+        justify-content: center;
+        padding: 0.85rem 1.25rem;
+        min-height: 48px;
+    }
+
+    .song-title-telugu {
+        font-size: 1.2rem;
+    }
+
+    .lyrics-line {
+        font-size: 0.95rem;
+    }
+
+    .lyrics-translation {
+        font-size: 0.78rem;
+    }
+
+    .pref-item {
+        padding: 0.5rem 0.75rem;
+        font-size: 0.88rem;
+    }
+
+    .modal-card {
+        max-width: 92vw;
+        padding: 1.75rem 1.15rem;
+    }
+
+    .modal-btn {
+        min-height: 44px;
+        padding: 0.7rem 1.2rem;
+    }
+
+    .form-input {
+        min-height: 44px;
+    }
+}
+
+@media (max-width: 360px) {
+    .container {
+        padding-left: 0.5rem;
+        padding-right: 0.5rem;
+    }
+
+    .number-wrapper {
+        font-size: 1.8rem;
+    }
+
+    .date-pill {
+        padding: 0.45rem 0.85rem;
+        font-size: 0.8rem;
     }
 }
 
@@ -1114,8 +1311,8 @@ kbd {
 /* Lyrics Card */
 .song-lyrics-card {
     width: 100%;
-    background: rgba(26, 10, 10, 0.7);
-    border: 1px solid rgba(212, 137, 26, 0.25);
+    background: var(--card-bg);
+    border: 1px solid var(--card-border);
     border-radius: var(--radius-md);
     padding: 1.25rem 1.5rem;
     display: flex;

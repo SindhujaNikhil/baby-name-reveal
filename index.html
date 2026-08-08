@@ -2,13 +2,13 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Baby Name Reveal — Nāmakaraṇa Countdown!</title>
-    <meta name="description" content="Join Sai Sindhuja & Nikhil in counting down to the Nāmakaraṇa — our baby's name reveal on August 16!">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+    <title>My Nāmakaraṇa Countdown! — Baby Name Reveal</title>
+    <meta name="description" content="Count down with me to my Nāmakaraṇa — my name reveal on August 16!">
 
     <!-- Open Graph Metadata -->
-    <meta property="og:title" content="🪔 Our Baby's Nāmakaraṇa Countdown! శుభ నామకరణం">
-    <meta property="og:description" content="Count down with us until August 16 as we reveal our baby's name in a traditional South Indian celebration!">
+    <meta property="og:title" content="🪔 My Nāmakaraṇa Countdown! నా నామకరణం">
+    <meta property="og:description" content="Count down with me until August 16 as my parents reveal my name in a traditional celebration!">
     <meta property="og:type" content="website">
 
     <!-- Google Fonts: South Indian-Inspired Pairings -->
@@ -17,8 +17,6 @@
     <link href="https://fonts.googleapis.com/css2?family=Rozha+One&family=Noto+Serif:ital,wght@0,400;0,600;0,700;1,400&family=Outfit:wght@300;400;500;600;700&family=Noto+Sans+Telugu:wght@400;600;700&display=swap" rel="stylesheet">
 
     <link rel="stylesheet" href="style.css">
-    <!-- YouTube IFrame API (for Bujji Meka audio player) -->
-    <script src="https://www.youtube.com/iframe_api"></script>
 </head>
 <body>
 
@@ -60,14 +58,14 @@
                 <span id="parent-names"></span>
             </div>
 
-            <h1 id="hero-title" class="hero-title">Our Little Miracle</h1>
+            <h1 id="hero-title" class="hero-title">Hi, I'm Your Little Miracle!</h1>
 
-            <p id="hero-subtitle" class="hero-subtitle" data-en="Something sweet is on the way..." data-te="శుభ సమయం ఆసన్నమైంది...">
-                Something sweet is on the way...
+            <p id="hero-subtitle" class="hero-subtitle" data-en="I'm counting down to my name reveal!" data-te="నా పేరు చెప్పే సమయం ఆసన్నమైంది...">
+                I'm counting down to my name reveal!
             </p>
 
-            <div class="ceremony-label" id="ceremony-label" data-en="Nāmakaraṇa Celebration" data-te="నామకరణం ఉత్సవం">
-                Nāmakaraṇa Celebration
+            <div class="ceremony-label" id="ceremony-label" data-en="My Nāmakaraṇa Celebration" data-te="నా నామకరణం ఉత్సవం">
+                My Nāmakaraṇa Celebration
             </div>
 
             <div class="date-pill">
@@ -80,22 +78,18 @@
         <section id="countdown-view">
             <div class="countdown-container">
                 <div class="time-box">
-                    <div class="deepam-top" aria-hidden="true">🪔</div>
                     <div id="days" class="number-wrapper">00</div>
                     <div class="label" data-en="Days" data-te="రోజులు">Days</div>
                 </div>
                 <div class="time-box">
-                    <div class="deepam-top" aria-hidden="true">🪔</div>
                     <div id="hours" class="number-wrapper">00</div>
                     <div class="label" data-en="Hours" data-te="గంటలు">Hours</div>
                 </div>
                 <div class="time-box">
-                    <div class="deepam-top" aria-hidden="true">🪔</div>
                     <div id="minutes" class="number-wrapper">00</div>
                     <div class="label" data-en="Minutes" data-te="నిమిషాలు">Minutes</div>
                 </div>
                 <div class="time-box">
-                    <div class="deepam-top" aria-hidden="true">🪔</div>
                     <div id="seconds" class="number-wrapper">00</div>
                     <div class="label" data-en="Seconds" data-te="సెకన్లు">Seconds</div>
                 </div>
@@ -158,37 +152,17 @@
             </div>
         </div>
 
-        <!-- Bujji Meka Song Section (hidden — set display:block to re-enable) -->
-        <section class="song-section" id="song-section" style="display:none">
+        <!-- Song Section (Simplified: Only Button & Audio Player) -->
+        <section class="song-section" id="song-section">
             <div class="song-card">
-                <div class="song-goat-icon" aria-hidden="true">🐐</div>
-                <div class="song-info">
-                    <div class="song-title-telugu">బుజ్జి మేక బుజ్జి మేక</div>
-                    <div class="song-title-en">Our Baby's Favourite Rhyme</div>
-                </div>
-
                 <!-- Custom Play/Pause Button -->
-                <button id="song-play-btn" class="song-play-btn" title="Play My Favourite Song" aria-label="Play Bujji Meka song">
+                <button id="song-play-btn" class="song-play-btn" title="Play My Favourite Song" aria-label="Play My Favourite Song">
                     <span class="play-icon" id="play-icon">▶</span>
                     <span class="song-btn-label" id="song-btn-label">Play My Favourite Song</span>
                 </button>
 
-                <!-- Lyrics Card (shown when playing) -->
-                <div class="song-lyrics-card" id="song-lyrics-card">
-                    <div class="lyrics-line">బుజ్జి మేక బుజ్జి మేక యాడికెళ్తివి?</div>
-                    <div class="lyrics-translation">Little goat, little goat — where are you going?</div>
-                    <div class="lyrics-divider">✦</div>
-                    <div class="lyrics-line">రాజు గారి తోటలోన మేతకెళ్తిని...</div>
-                    <div class="lyrics-translation">To graze in the king's garden...</div>
-                    <div class="lyrics-divider">✦</div>
-                    <div class="lyrics-line">తోటమాలి కొట్ట వస్తే తుర్రుమంటిని!</div>
-                    <div class="lyrics-translation">When the gardener came to hit — I ran away!</div>
-                </div>
-
-                <!-- Hidden YouTube Audio Player (off-screen, needs real size to initialize) -->
-                <div id="yt-player-container" style="position:fixed;left:-9999px;top:-9999px;width:320px;height:180px;pointer-events:none;">
-                    <div id="yt-player"></div>
-                </div>
+                <!-- HTML5 Native Audio Player -->
+                <audio id="bujji-audio" src="assets/bujji-meka-audio.mpeg" preload="auto"></audio>
             </div>
         </section>
 
@@ -197,11 +171,11 @@
             <div class="baby-world-card">
                 <div class="baby-world-header">
                     <span class="baby-world-icon">🌟</span>
-                    <h2 class="baby-world-title" data-en="Bujjiamma's World" data-te="బుజ్జిఅమ్మ ప్రపంచం">Bujjiamma's World</h2>
+                    <h2 class="baby-world-title" data-en="My Little World" data-te="నా చిన్ని ప్రపంచం">My Little World</h2>
                     <span class="baby-world-icon">🌟</span>
                 </div>
-                <p class="baby-world-subtitle" data-en="Little things that make her smile & frown" data-te="ఆమె నవ్వించే మరియు విసుగు కలిగించే చిన్ని విషయాలు">
-                    Little things that make her smile &amp; frown
+                <p class="baby-world-subtitle" data-en="Little things that make me smile & frown" data-te="నన్ను నవ్వించే మరియు విసుగు కలిగించే చిన్ని విషయాలు">
+                    Little things that make me smile &amp; frown
                 </p>
 
                 <div class="baby-world-columns">
@@ -209,11 +183,11 @@
                     <div class="baby-world-col likes-col">
                         <div class="baby-face-wrap">
                             <img id="baby-img-happy" class="baby-col-face baby-face-happy" src="assets/bujjiamma_happy.png" alt="Bujjiamma smiling" />
-                            <div class="baby-face-label likes-face-label">😄 She loves...</div>
+                            <div class="baby-face-label likes-face-label">😄 I love...</div>
                         </div>
                         <div class="col-header likes-header">
                             <span class="col-emoji">💛</span>
-                            <span class="col-label" data-en="She Loves" data-te="ఆమె ఇష్టాలు">She Loves</span>
+                            <span class="col-label" data-en="I Love" data-te="నా ఇష్టాలు">I Love</span>
                         </div>
                         <ul class="preferences-list" id="likes-list">
                             <!-- Populated by JS -->
@@ -231,11 +205,11 @@
                     <div class="baby-world-col dislikes-col">
                         <div class="baby-face-wrap">
                             <img id="baby-img-sad" class="baby-col-face baby-face-sad" src="assets/bujjiamma_sad.png" alt="Bujjiamma pouting" />
-                            <div class="baby-face-label dislikes-face-label">😤 She hates...</div>
+                            <div class="baby-face-label dislikes-face-label">😤 I dislike...</div>
                         </div>
                         <div class="col-header dislikes-header">
                             <span class="col-emoji">🙈</span>
-                            <span class="col-label" data-en="She Hates" data-te="ఆమె అయిష్టాలు">She Hates</span>
+                            <span class="col-label" data-en="I Dislike" data-te="నా అయిష్టాలు">I Dislike</span>
                         </div>
                         <ul class="preferences-list" id="dislikes-list">
                             <!-- Populated by JS -->
@@ -249,7 +223,7 @@
         <footer>
             <div class="footer-deepam">🪔</div>
             <p>
-                Made with ❤️ for our <span id="ceremony-footer" data-en="Nāmakaraṇa" data-te="నామకరణం">Nāmakaraṇa</span> celebration
+                Made with ❤️ for my <span id="ceremony-footer" data-en="Nāmakaraṇa" data-te="నామకరణం">Nāmakaraṇa</span> celebration
                 &nbsp;|&nbsp;
                 <span id="secret-trigger" class="secret-trigger">✨ Admin Preview</span>
             </p>

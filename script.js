@@ -65,8 +65,8 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 
     // 3. Theme Toggle Setup
-    const themes = ['temple', 'silk', 'jasmine'];
-    const themeIcons = ['🏛️', '🦚', '🌸'];
+    const themes = ['rose', 'temple', 'silk', 'jasmine'];
+    const themeIcons = ['🌸', '🏛️', '🦚', '🌼'];
     let currentThemeIndex = themes.indexOf(config.defaultTheme) !== -1 ? themes.indexOf(config.defaultTheme) : 0;
     
     function applyTheme(index) {
@@ -352,82 +352,46 @@ document.addEventListener('DOMContentLoaded', () => {
 });
 
 /* ==========================================================================
-   Bujji Meka — YouTube Audio Player
+   Bujji Meka — Native HTML5 Audio Player
    ========================================================================== */
 
-let ytPlayer = null;
 let songIsPlaying = false;
-let ytPlayerReady = false;
 
-// Called automatically by the YouTube IFrame API once it loads
-function onYouTubeIframeAPIReady() {
-    ytPlayer = new YT.Player('yt-player', {
-        height: '180',
-        width: '320',
-        videoId: 'OFkrRdh1YtY',   // Infobells — Bujji Meka Bujji Meka Telugu Rhyme
-        playerVars: {
-            autoplay: 0,
-            controls: 0,
-            modestbranding: 1,
-            rel: 0,
-            playsinline: 1,
-            origin: window.location.origin || '*',
-        },
-        events: {
-            onReady: function() { ytPlayerReady = true; },
-            onStateChange: onSongStateChange,
-            onError: function(e) {
-                console.warn('YT player error:', e.data);
-                const btnLabel = document.getElementById('song-btn-label');
-                if (btnLabel) btnLabel.textContent = 'Play My Favourite Song';
-            }
-        }
-    });
-}
-
-function onSongStateChange(event) {
-    const playBtn    = document.getElementById('song-play-btn');
-    const playIcon   = document.getElementById('play-icon');
-    const btnLabel   = document.getElementById('song-btn-label');
-    const lyricsCard = document.getElementById('song-lyrics-card');
-
-    if (!playBtn) return;
-
-    if (event.data === YT.PlayerState.PLAYING) {
-        songIsPlaying = true;
-        playIcon.textContent = '⏸';
-        btnLabel.textContent = 'Pause Song';
-        playBtn.classList.add('is-playing');
-        lyricsCard.classList.add('visible');
-    } else if (event.data === YT.PlayerState.PAUSED || event.data === YT.PlayerState.ENDED) {
-        songIsPlaying = false;
-        playIcon.textContent = '▶';
-        btnLabel.textContent = 'Play My Favourite Song';
-        playBtn.classList.remove('is-playing');
-        if (event.data === YT.PlayerState.ENDED) {
-            lyricsCard.classList.remove('visible');
-        }
-    }
-}
-
-// Wire up the button click
 document.addEventListener('DOMContentLoaded', () => {
-    const playBtn = document.getElementById('song-play-btn');
+    const playBtn  = document.getElementById('song-play-btn');
+    const playIcon = document.getElementById('play-icon');
     const btnLabel = document.getElementById('song-btn-label');
-    if (playBtn) {
-        playBtn.addEventListener('click', () => {
-            if (!ytPlayer || !ytPlayerReady) {
-                // Player still loading — show feedback
-                if (btnLabel) btnLabel.textContent = 'Loading...';
-                return;
-            }
-            if (songIsPlaying) {
-                ytPlayer.pauseVideo();
-            } else {
-                ytPlayer.playVideo();
-            }
-        });
+    const audio    = document.getElementById('bujji-audio');
+
+    if (!playBtn || !audio) return;
+
+    function toggleAudio() {
+        if (audio.paused) {
+            audio.play().then(() => {
+                songIsPlaying = true;
+                if (playIcon) playIcon.textContent = '⏸';
+                if (btnLabel) btnLabel.textContent = 'Pause Song';
+                playBtn.classList.add('is-playing');
+            }).catch(err => {
+                console.warn('Audio play failed:', err);
+            });
+        } else {
+            audio.pause();
+            songIsPlaying = false;
+            if (playIcon) playIcon.textContent = '▶';
+            if (btnLabel) btnLabel.textContent = 'Play My Favourite Song';
+            playBtn.classList.remove('is-playing');
+        }
     }
+
+    playBtn.addEventListener('click', toggleAudio);
+
+    audio.addEventListener('ended', () => {
+        songIsPlaying = false;
+        if (playIcon) playIcon.textContent = '▶';
+        if (btnLabel) btnLabel.textContent = 'Play My Favourite Song';
+        playBtn.classList.remove('is-playing');
+    });
 });
 
 /* ==========================================================================
@@ -475,30 +439,26 @@ document.addEventListener('DOMContentLoaded', () => {
 });
 
 /* ==========================================================================
-   Baby Footprints — Scroll Effect
+   Baby Footprints — Natural Scroll Trail
    ========================================================================== */
 
 (function () {
-    // SVG path for a baby foot (left foot; right is mirrored via CSS)
-    const FOOT_SVG = `<svg viewBox="0 0 30 44" xmlns="http://www.w3.org/2000/svg">
-        <!-- Heel -->
-        <ellipse cx="15" cy="36" rx="10" ry="8"/>
-        <!-- Ball of foot -->
-        <ellipse cx="15" cy="22" rx="8.5" ry="8"/>
-        <!-- Big toe -->
-        <ellipse cx="4"  cy="12" rx="4"   ry="3.5"/>
-        <!-- Toes -->
-        <ellipse cx="10" cy="7"  rx="3.4" ry="3.1"/>
-        <ellipse cx="17" cy="5"  rx="3.2" ry="3"/>
-        <ellipse cx="23" cy="7"  rx="3"   ry="2.8"/>
-        <ellipse cx="28" cy="12" rx="2.6" ry="2.4"/>
+    // Authentic vector path for a realistic baby foot (left foot; right foot mirrored via CSS scaleX)
+    const FOOT_SVG = `<svg viewBox="0 0 40 60" xmlns="http://www.w3.org/2000/svg">
+        <!-- Baby foot sole curve (heel, arch, ball) -->
+        <path d="M 20 56 C 12 56 9 46 11 36 C 13 26 9 19 15 13 C 20 8 28 10 32 16 C 36 22 34 33 32 41 C 30 50 26 56 20 56 Z"/>
+        <!-- 5 distinct organic arced toes -->
+        <circle cx="9"  cy="9"  r="4.5"/>
+        <circle cx="17" cy="5"  r="3.6"/>
+        <circle cx="24" cy="6"  r="3.2"/>
+        <circle cx="30" cy="10" r="2.8"/>
+        <circle cx="34" cy="16" r="2.4"/>
     </svg>`;
 
-    const MARGIN        = 28;   // px from screen edge
-    const STEP_PX       = 100;  // scroll pixels between each footprint
-    const LINGER_MS     = 2500; // how long the print stays visible
-    const FADE_MS       = 800;  // fade-out duration (match CSS)
-    const MAX_PRINTS    = 60;   // cap to avoid DOM bloat
+    const STEP_PX       = 240;  // scroll pixels between each footprint (gentle pace)
+    const LINGER_MS     = 2000; // time footprint stays visible
+    const FADE_MS       = 700;  // fade-out duration
+    const MAX_PRINTS    = 8;    // subtle limit to avoid screen clutter
 
     let lastScrollY     = window.scrollY;
     let accumulated     = 0;
@@ -512,20 +472,20 @@ document.addEventListener('DOMContentLoaded', () => {
         const isLeft   = stepIndex % 2 === 0;
         const side     = isLeft ? 'left' : 'right';
         const rotate   = isLeft
-            ? (-20 + Math.random() * 18) + 'deg'   // left foot tilts left
-            : (20  - Math.random() * 18) + 'deg';  // right foot tilts right
+            ? (-16 + Math.random() * 8) + 'deg'   // gentle left foot angle
+            : (16  - Math.random() * 8) + 'deg';  // gentle right foot angle
 
-        // Vertical: random-ish position in the visible viewport
-        const topPct   = 20 + Math.random() * 60;  // 20%–80% of viewport height
+        // Placement along page side margins near middle of viewport
+        const topPct   = 35 + Math.random() * 30; // 35%–65% of viewport
         const topPx    = topPct + 'vh';
+        const marginPx = Math.min(32, Math.max(16, Math.floor(window.innerWidth * 0.035)));
 
         const fp = document.createElement('div');
         fp.className  = `baby-footprint ${isLeft ? 'footprint-left' : 'footprint-right'}`;
         fp.innerHTML  = FOOT_SVG;
         fp.style.setProperty('--fp-rotate', rotate);
-        fp.style[side] = MARGIN + 'px';
+        fp.style[side] = marginPx + 'px';
         fp.style.top   = topPx;
-        fp.style.transform = `rotate(${rotate})`;
 
         document.body.appendChild(fp);
         activeCount++;
@@ -536,7 +496,7 @@ document.addEventListener('DOMContentLoaded', () => {
             fp.classList.add('fading-out');
             setTimeout(() => {
                 fp.remove();
-                activeCount--;
+                activeCount = Math.max(0, activeCount - 1);
             }, FADE_MS);
         }, LINGER_MS);
 
