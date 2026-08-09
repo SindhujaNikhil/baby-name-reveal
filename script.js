@@ -62,8 +62,7 @@ document.addEventListener('DOMContentLoaded', () => {
     // If the date string doesn't have a timezone (e.g. Z or +05:30), it is parsed in the user's local timezone.
     const targetDate = new Date(config.revealDate);
     if (revealDateDisplay) {
-        const options = { month: 'long', day: 'numeric', year: 'numeric', hour: '2-digit', minute: '2-digit' };
-        revealDateDisplay.textContent = targetDate.toLocaleDateString('en-US', options);
+        revealDateDisplay.textContent = "August 16, 2026 at 10:00 AM";
     }
 
     // Location Setup
