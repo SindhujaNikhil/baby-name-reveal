@@ -6,7 +6,7 @@
 
 window.BabyRevealConfig = {
     // Reveal Date & Time (Format: YYYY-MM-DDTHH:MM:SS)
-    revealDate: "2026-08-09T12:30:00",
+    revealDate: "2026-08-09T13:00:00",
 
     // Parents Info
     parentNames: "My Loving Parents:<br><span class=\"parent-names-highlight\">Sai Sindhuja & Nikhil Kumar</span>",
@@ -17,7 +17,7 @@ window.BabyRevealConfig = {
     subtitleTelugu: "నా పేరు చెప్పే సమయం ఆసన్నమైంది...",
 
     // Event Location
-    eventLocationUrl: "https://www.google.com/maps/dir//AVOPA+Seva+Sadan,+Roja+Darga+Street+near+railway+track,+tungabadra,+Postal+Colony,+Kurnool,+Andhra+Pradesh+518004,+India/@15.8212582,78.0437213,14z/data=!4m8!4m7!1m0!1m5!1m1!1s0x3bb5e7414e2ef4a9:0x7c2fc2874d6c1fb1!2m2!1d78.0371629!2d15.8431095!5m1!1e4?entry=ttu&g_ep=EgoyMDI2MDgwNS4xIKXMDSoASAFQAw%3D%3D", // Added the exact Google Maps link
+    eventLocationUrl: "https://www.google.com/maps/place/AVOPA+Seva+Sadan/@15.8430832,78.0346411,17z/data=!3m1!4b1!4m6!3m5!1s0x3bb5e7414e2ef4a9:0x7c2fc2874d6c1fb1!8m2!3d15.8430832!4d78.037216!16s%2Fg%2F11cs5_b56m!5m1!1e4?entry=tts&g_ep=EgoyMDI2MDgwNS4xIPu8ASoASAFQAw%3D%3D&skid=027e3d5c-ff11-42bc-8c70-5136c37165ce", // Added the exact Google Maps link
     eventAddress: "AVOPA Seva Sadan, Postal Colony, Kurnool.",
 
     // Baby Name Details
