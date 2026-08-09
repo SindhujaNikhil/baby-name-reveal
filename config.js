@@ -6,7 +6,7 @@
 
 window.BabyRevealConfig = {
     // Reveal Date & Time (Format: YYYY-MM-DDTHH:MM:SS)
-    revealDate: "2026-08-09T13:00:00",
+    revealDate: "2026-08-16T13:00:00",
 
     // Parents Info
     parentNames: "My Loving Parents:<br><span class=\"parent-names-highlight\">Sai Sindhuja & Nikhil Kumar</span>",
