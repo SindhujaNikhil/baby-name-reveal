@@ -21,8 +21,8 @@ window.BabyRevealConfig = {
     eventAddress: "AVOPA Seva Sadan, Postal Colony, Kurnool.",
 
     // Baby Name Details
-    babyName: "Venkata Madhuraadhya",
-    babyNameTelugu: "వెంకట మధురాధ్య",
+    babyName: "Venkata Madhuraadya",
+    babyNameTelugu: "వెంకట మధురాద్య",
     babyGender: "Girl",
     nameMeaning: "Our Sweetest Mah Durga.",
     nameMeaningTelugu: "మా ముద్దుల దుర్గా దేవి",
